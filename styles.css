@@ -761,6 +761,9 @@ textarea:focus {
 .project-video {
   width: 100%;
   max-width: 576px;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 0;
   border-radius: var(--radius);
   display: block;
   margin: 0 auto 12px;
