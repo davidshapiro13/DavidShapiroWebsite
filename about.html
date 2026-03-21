@@ -249,46 +249,58 @@
     <script src="performance.js"></script>
     <script>
       const aboutImages = [
-        "assets/about/memories/18th Birthday (2019).png",
-        "assets/about/memories/Acting (2018).png",
-        "assets/about/memories/Brandeis Friends (2023).png",
-        "assets/about/memories/CS Graduation (2024).png",
-        "assets/about/memories/College Dorm Life (2024).png",
-        "assets/about/memories/Denmark Exchange (2019).png",
-        "assets/about/memories/Filmmaking Class (2022).png",
-        "assets/about/memories/Fresh Start Screening (2024).png",
-        "assets/about/memories/Frog (2024).png",
-        "assets/about/memories/Graduating High School (2020).png",
-        "assets/about/memories/High School Friends (2019).png",
-        "assets/about/memories/Holding Baby Kangaroo (2023).png",
-        "assets/about/memories/Moving into College (2021).png",
-        "assets/about/memories/On an Boat in Rangeley, Maine (2022).png",
-        "assets/about/memories/Surfing in Hawaii (2023).png",
-        "assets/about/memories/The Drowsy Chaperone (2019).png",
-        "assets/about/memories/Upside Down in Estonia (2024).png",
-        "assets/about/memories/Visiting Aarhus Denmark (2024).png",
-        "assets/about/memories/Visiting friend Toby in Denmark (2024).png",
-        "assets/about/memories/Volunteering on Drumlin Farm (2022).png",
-        "assets/about/memories/With friend Owen in Sydney Australia (2023).png",
-        "assets/about/memories/Working at SIMS (2022).png"
+        "assets/about/memories/18th Birthday (10-2019).png",
+        "assets/about/memories/Acting (05-2018).png",
+        "assets/about/memories/Brandeis Friends (01-2023).png",
+        "assets/about/memories/CS Graduation (05-2024).png",
+        "assets/about/memories/College Dorm Life (04-2024).png",
+        "assets/about/memories/Comic School (08-2025).png",
+        "assets/about/memories/Denmark Exchange (11-2019).png",
+        "assets/about/memories/Exploring Thailand (03-2025).png",
+        "assets/about/memories/Filmmaking Class (03-2022).png",
+        "assets/about/memories/Fresh Start Screening (04-2024).png",
+        "assets/about/memories/Frog (07-2024).png",
+        "assets/about/memories/Graduating High School (05-2020).png",
+        "assets/about/memories/High School Friends (04-2019).png",
+        "assets/about/memories/Holding Baby Kangaroo (02-2023).png",
+        "assets/about/memories/Moving into College (09-2021).png",
+        "assets/about/memories/On an Boat in Rangeley, Maine (07-2022).png",
+        "assets/about/memories/Surfing in Hawaii (06-2023).png",
+        "assets/about/memories/The Drowsy Chaperone (05-2019).png",
+        "assets/about/memories/Upside Down in Estonia (08-2024).png",
+        "assets/about/memories/Visiting Aarhus Denmark (08-2024).png",
+        "assets/about/memories/Visiting friend Toby in Denmark (08-2024).png",
+        "assets/about/memories/Volunteering in Cambodia (03-2025).png",
+        "assets/about/memories/Volunteering on Drumlin Farm (03-2022).png",
+        "assets/about/memories/WWOOFing on a Farm (11-2024).png",
+        "assets/about/memories/With friend Owen in Sydney Australia (02-2023).png",
+        "assets/about/memories/Workaway in Cambodia (03-2025).png",
+        "assets/about/memories/Working as a Vampire (10-2024).png",
+        "assets/about/memories/Working at SIMS (12-2022).png"
       ];
       const aboutGalleryGrid = document.getElementById("about-gallery-grid");
       const aboutLightbox = document.querySelector(".about-gallery-lightbox");
       const aboutLightboxImage = aboutLightbox?.querySelector(".drone-lightbox-image");
 
-      const memoryYear = (src) => {
+      const memoryYearMonth = (src) => {
         const filename = src.split("/").pop().replace(/\.[^.]+$/, "");
-        const yearMatch = filename.match(/\((\d{4})\)\s*$/);
-        return yearMatch ? Number.parseInt(yearMatch[1], 10) : Number.POSITIVE_INFINITY;
+        const ymMatch = filename.match(/\((\d{2})-(\d{4})\)\s*$/);
+        if (!ymMatch) return Number.POSITIVE_INFINITY;
+        const month = Number.parseInt(ymMatch[1], 10);
+        const year = Number.parseInt(ymMatch[2], 10);
+        if (Number.isNaN(month) || Number.isNaN(year)) return Number.POSITIVE_INFINITY;
+        return year * 100 + month; // sortable YYYYMM
       };
 
       const memoryCaption = (src) => {
         const filename = src.split("/").pop().replace(/\.[^.]+$/, "");
-        return filename.replace(/\s*\(\d{4}\)\s*$/, "").trim();
+        const ymMatch = filename.match(/\((\d{2})-(\d{4})\)\s*$/);
+        const caption = filename.replace(/\s*\(\d{2}-\d{4}\)\s*$/, "").trim();
+        return ymMatch ? `${caption} (${ymMatch[2]})` : caption;
       };
 
       if (aboutGalleryGrid) {
-        const sortedAboutImages = [...aboutImages].sort((a, b) => memoryYear(b) - memoryYear(a));
+        const sortedAboutImages = [...aboutImages].sort((a, b) => memoryYearMonth(b) - memoryYearMonth(a));
         sortedAboutImages.forEach((src) => {
           const caption = memoryCaption(src);
           const tile = document.createElement("button");
