@@ -1270,6 +1270,16 @@ textarea:focus {
   justify-items: center;
 }
 
+.acting-carousel .carousel-image {
+  object-fit: cover;
+  background: transparent;
+}
+
+.acting-carousel .carousel-frame {
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
 .acting-main {
   padding-top: 0;
 }
@@ -2113,6 +2123,15 @@ textarea:focus {
   .acting-profile-block {
     grid-template-columns: 1fr;
   }
+
+  .acting-profile-actions {
+    justify-content: center;
+  }
+
+  .acting-profile-actions .btn {
+    flex: 1 1 160px;
+    text-align: center;
+  }
 }
 
 .background-roles {
@@ -2871,6 +2890,7 @@ textarea:focus {
   max-height: 320px;
   overflow-y: auto;
   scrollbar-width: auto;
+  overscroll-behavior: contain;
 }
 
 .about-experience-layout {
