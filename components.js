@@ -2,8 +2,16 @@
   const headerMarkup = `
     <header class="site-header">
       <div class="site-header-inner">
-        <h1 class="site-title">David Shapiro</h1>
-        <nav class="nav" aria-label="Primary">
+        <div class="site-header-brand">
+          <h1 class="site-title">David Shapiro</h1>
+        </div>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+          <svg class="nav-toggle-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <span class="visually-hidden">Toggle menu</span>
+        </button>
+        <nav class="nav" id="primary-nav" aria-label="Primary">
           <a href="index.html" data-nav>Home</a>
           <a href="about.html" data-nav>About</a>
           <a href="filmmaking.html" data-nav>Filmmaking</a>
@@ -56,6 +64,21 @@
     document.querySelectorAll("[data-component='header']").forEach((node) => {
       node.innerHTML = headerMarkup;
       setActiveNav(node);
+      const header = node.querySelector(".site-header");
+      const toggle = node.querySelector(".nav-toggle");
+      const nav = node.querySelector("#primary-nav");
+      if (header && toggle && nav) {
+        toggle.addEventListener("click", () => {
+          const isOpen = header.classList.toggle("is-open");
+          toggle.setAttribute("aria-expanded", String(isOpen));
+        });
+        nav.addEventListener("click", (event) => {
+          if (event.target.closest("a")) {
+            header.classList.remove("is-open");
+            toggle.setAttribute("aria-expanded", "false");
+          }
+        });
+      }
     });
 
     document.querySelectorAll("[data-component='footer']").forEach((node) => {

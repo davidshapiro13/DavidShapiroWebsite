@@ -16,20 +16,20 @@
         <img loading="lazy" src="assets/about/about-header.png" alt="About page header image.">
       </figure>
 
-      <nav class="film-quicknav" aria-label="About page sections">
-        <a class="film-quicknav-item" href="#about-experience-title">
+      <nav class="film-quicknav quicknav" aria-label="About page sections">
+        <a class="film-quicknav-item quicknav-item" href="#about-experience-title">
           <img loading="lazy" src="assets/about/about-experience-thumbnail.png" alt="">
           <span>Experience</span>
         </a>
-        <a class="film-quicknav-item" href="#about-news-title">
+        <a class="film-quicknav-item quicknav-item" href="#about-news-title">
           <img loading="lazy" src="assets/about/about-news-thumbnail.png" alt="">
           <span>In the News</span>
         </a>
-        <a class="film-quicknav-item" href="#about-flex-title">
+        <a class="film-quicknav-item quicknav-item" href="#about-flex-title">
           <img loading="lazy" src="assets/about/about-travel-thumbnail.png" alt="">
           <span>Travel/Adventure</span>
         </a>
-        <a class="film-quicknav-item" href="#about-college-title">
+        <a class="film-quicknav-item quicknav-item" href="#about-college-title">
           <img loading="lazy" src="assets/about/about-education-thumbnail.png" alt="">
           <span>Education</span>
         </a>
@@ -51,7 +51,8 @@
         <h2 id="about-experience-title" class="section-title">Experience</h2>
         <div class="content-block about-panel about-experience-layout">
           <div>
-            <div class="about-experience-box">
+            <div class="about-experience-shell">
+              <div class="about-experience-box">
               <div class="about-experience-item">
                 <div>
                   <span class="about-exp-company">ContentsPal</span>
@@ -108,12 +109,16 @@
                 </div>
                 <span class="about-exp-years">2019-2020</span>
               </div>
+              </div>
+              <button class="about-exp-scroll" type="button" aria-label="Scroll experience list down">
+                <span aria-hidden="true">↓</span>
+              </button>
             </div>
             <p class="btn-wrap"><a class="btn" href="assets/about/resume.pdf" target="_blank" rel="noopener">View My Resume</a></p>
           </div>
           <div class="about-experience-gallery" aria-label="Experience highlights">
-            <img loading="lazy" src="assets/about/experience1.png" alt="Experience highlight 1.">
-            <img loading="lazy" src="assets/about/experience2.png" alt="Experience highlight 2.">
+            <img loading="lazy" src="assets/about/experience1.png" alt="Experience highlight 1." data-about-lightbox-image>
+            <img loading="lazy" src="assets/about/experience2.png" alt="Experience highlight 2." data-about-lightbox-image>
           </div>
         </div>
       </section>
@@ -155,7 +160,12 @@
       <section aria-labelledby="about-flex-title">
         <h2 id="about-flex-title" class="section-title">Flex Year</h2>
         <div class="content-block about-panel">
-          <div class="acting-quicknav acting-quicknav--slider about-flex-quicknav" id="about-flex-quicknav" aria-label="Flex Year image options"></div>
+          <div class="about-flex-deck">
+            <button class="about-flex-arrow about-flex-arrow--prev" type="button" aria-label="Previous Flex Year photo">←</button>
+            <div class="acting-quicknav acting-quicknav--slider about-flex-quicknav" id="about-flex-quicknav" aria-label="Flex Year image options"></div>
+            <button class="about-flex-arrow about-flex-arrow--next" type="button" aria-label="Next Flex Year photo">→</button>
+          </div>
+          <div class="about-flex-dots" aria-label="Flex Year image position"></div>
           <p class="about-flex-intro">A year to explore flexible jobs and opportunites all over the world</p>
           <ul class="computers-list about-flex-list">
             <li>Taught English in Cambodia</li>
@@ -281,6 +291,13 @@
       const aboutGalleryGrid = document.getElementById("about-gallery-grid");
       const aboutLightbox = document.querySelector(".about-gallery-lightbox");
       const aboutLightboxImage = aboutLightbox?.querySelector(".drone-lightbox-image");
+      const openAboutLightbox = (src, alt) => {
+        if (!aboutLightbox || !aboutLightboxImage) return;
+        aboutLightboxImage.src = src;
+        aboutLightboxImage.alt = alt || "";
+        aboutLightbox.classList.add("is-open");
+        aboutLightbox.setAttribute("aria-hidden", "false");
+      };
 
       const memoryYearMonth = (src) => {
         const filename = src.split("/").pop().replace(/\.[^.]+$/, "");
@@ -323,11 +340,7 @@
           aboutGalleryGrid.appendChild(tile);
 
           tile.addEventListener("click", () => {
-            if (!aboutLightbox || !aboutLightboxImage) return;
-            aboutLightboxImage.src = src;
-            aboutLightboxImage.alt = caption;
-            aboutLightbox.classList.add("is-open");
-            aboutLightbox.setAttribute("aria-hidden", "false");
+            openAboutLightbox(src, caption);
           });
         });
       }
@@ -354,6 +367,22 @@
         });
       }
 
+      const expBox = document.querySelector(".about-experience-box");
+      const expScroll = document.querySelector(".about-exp-scroll");
+      if (expBox && expScroll) {
+        expScroll.addEventListener("click", () => {
+          const firstItem = expBox.querySelector(".about-experience-item");
+          const step = firstItem ? firstItem.offsetHeight : 80;
+          expBox.scrollBy({ top: step, behavior: "smooth" });
+        });
+      }
+
+      document.querySelectorAll("[data-about-lightbox-image]").forEach((img) => {
+        img.addEventListener("click", () => {
+          openAboutLightbox(img.currentSrc || img.src, img.alt);
+        });
+      });
+
       const flexImages = [
         "assets/about/flex-year/Page 0.jpg",
         "assets/about/flex-year/Page 1.jpg",
@@ -370,10 +399,12 @@
         "assets/about/flex-year/Page 12.jpg"
       ];
       const flexQuicknav = document.getElementById("about-flex-quicknav");
+      const flexDots = document.querySelector(".about-flex-dots");
 
       if (flexQuicknav) {
         let flexIndex = 0;
         const quicknavItems = [];
+        const dotItems = [];
 
         flexImages.forEach((src, i) => {
           const button = document.createElement("button");
@@ -383,10 +414,23 @@
           button.innerHTML = `<img loading="lazy" src="${src}" alt="Flex Year photo ${i + 1} thumbnail.">`;
           button.addEventListener("click", () => {
             setActiveFlexImage(i);
+            openAboutLightbox(src, `Flex Year photo ${i + 1}`);
           });
           flexQuicknav.appendChild(button);
           quicknavItems.push(button);
         });
+
+        if (flexDots) {
+          flexImages.forEach((_, i) => {
+            const dot = document.createElement("button");
+            dot.type = "button";
+            dot.className = "about-flex-dot";
+            dot.setAttribute("aria-label", `Show Flex Year photo ${i + 1}`);
+            dot.addEventListener("click", () => setActiveFlexImage(i));
+            flexDots.appendChild(dot);
+            dotItems.push(dot);
+          });
+        }
 
         const revealItem = (el) => {
           const targetLeft = el.offsetLeft - (flexQuicknav.clientWidth - el.clientWidth) / 2;
@@ -397,10 +441,23 @@
           flexIndex = (index + flexImages.length) % flexImages.length;
           quicknavItems.forEach((item, i) => {
             item.classList.toggle("is-active", i === flexIndex);
+            item.classList.toggle("is-prev", i === (flexIndex - 1 + flexImages.length) % flexImages.length);
+            item.classList.toggle("is-next", i === (flexIndex + 1) % flexImages.length);
+            item.classList.toggle("is-hidden", i !== flexIndex && i !== (flexIndex - 1 + flexImages.length) % flexImages.length && i !== (flexIndex + 1) % flexImages.length);
+          });
+          dotItems.forEach((dot, i) => {
+            dot.classList.toggle("is-active", i === flexIndex);
           });
           revealItem(quicknavItems[flexIndex]);
         };
         setActiveFlexImage(0);
+
+        const prevBtn = document.querySelector(".about-flex-arrow--prev");
+        const nextBtn = document.querySelector(".about-flex-arrow--next");
+        if (prevBtn && nextBtn) {
+          prevBtn.addEventListener("click", () => setActiveFlexImage(flexIndex - 1));
+          nextBtn.addEventListener("click", () => setActiveFlexImage(flexIndex + 1));
+        }
       }
     </script>
   </body>

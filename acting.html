@@ -26,20 +26,20 @@
       </section>
 
       <section class="acting-quicknav-wrap" aria-label="Acting categories">
-        <div class="acting-quicknav acting-quicknav--slider" id="acting-quicknav">
-          <a class="acting-quicknav-item" href="#feature-films">
+        <div class="film-quicknav acting-quicknav quicknav" id="acting-quicknav">
+          <a class="film-quicknav-item acting-quicknav-item quicknav-item" href="#feature-films">
             <img loading="lazy" src="assets/acting/acting-feature.png" alt="REPLACE: Feature films icon.">
             <span>Feature Films</span>
           </a>
-          <a class="acting-quicknav-item" href="#commercials">
+          <a class="film-quicknav-item acting-quicknav-item quicknav-item" href="#commercials">
             <img loading="lazy" src="assets/acting/acting-commercial.png" alt="REPLACE: Commercials icon.">
             <span>Commercials</span>
           </a>
-          <a class="acting-quicknav-item" href="#short-films">
+          <a class="film-quicknav-item acting-quicknav-item quicknav-item" href="#short-films">
             <img loading="lazy" src="assets/acting/acting-short-film.png" alt="REPLACE: Short films icon.">
             <span>Short Films</span>
           </a>
-          <a class="acting-quicknav-item" href="#theatre">
+          <a class="film-quicknav-item acting-quicknav-item quicknav-item" href="#theatre">
             <img loading="lazy" src="assets/acting/acting-theatre.jpeg" alt="Theatre icon.">
             <span>Theatre</span>
           </a>
@@ -371,17 +371,7 @@
         });
       }
 
-      const quicknav = document.getElementById("acting-quicknav");
-      const quicknavItems = quicknav.querySelectorAll(".acting-quicknav-item");
-
-      const revealItem = (el) => {
-        el.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-      };
-
-      quicknavItems.forEach((item) => {
-        item.addEventListener("mouseenter", () => revealItem(item));
-        item.addEventListener("focus", () => revealItem(item));
-      });
+      // No hover scroll behavior for acting quicknav; keep it stable like other pages.
     </script>
   </body>
 </html>

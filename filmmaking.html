@@ -28,20 +28,20 @@
         <p class="film-subscribe-text">Subscribe to David's YouTube Channel - <a class="link-accent" href="https://www.youtube.com/@DavidShapiroAdventures/videos" target="_blank" rel="noopener">David Shapiro Adventures</a></p>
       </section>
 
-      <section class="film-quicknav" aria-label="Filmmaking categories">
-        <a class="film-quicknav-item" href="#short-films">
+      <section class="film-quicknav quicknav" aria-label="Filmmaking categories">
+        <a class="film-quicknav-item quicknav-item" href="#short-films">
           <img loading="lazy" src="assets/film/film-short-icon.jpeg" alt="David and his friends working on a film">
           <span>Short Films</span>
         </a>
-        <a class="film-quicknav-item" href="#adventure-vlogs">
+        <a class="film-quicknav-item quicknav-item" href="#adventure-vlogs">
           <img loading="lazy" src="assets/film/film-adventure-icon.jpg" alt="David in Cambodia">
           <span>Adventure Vlogs</span>
         </a>
-        <a class="film-quicknav-item" href="#documentaries">
+        <a class="film-quicknav-item quicknav-item" href="#documentaries">
           <img loading="lazy" src="assets/film/film-doc-icon.jpeg" alt="Owners of Old Frog Pond Farm stand in front of their sign.">
           <span>Documentaries</span>
         </a>
-        <a class="film-quicknav-item" href="#drone-photography">
+        <a class="film-quicknav-item quicknav-item" href="#drone-photography">
           <img loading="lazy" src="assets/film/film-drone-icon.jpg" alt="Drone photo from Maine.">
           <span>Drone Photography</span>
         </a>
@@ -326,7 +326,26 @@
       let filmIndex = 0;
       const filmImageA = document.getElementById("filmmaking-carousel-image-a");
       const filmImageB = document.getElementById("filmmaking-carousel-image-b");
+      const filmCarouselFrame = document.querySelector(".filmmaking-carousel .carousel-frame");
       let useA = true;
+      let filmAspectRatio = null;
+
+      const updateFilmFrameHeight = (img) => {
+        if (!filmCarouselFrame || !img || !img.naturalWidth) return;
+        filmAspectRatio = img.naturalHeight / img.naturalWidth;
+        const width = filmCarouselFrame.clientWidth;
+        if (width > 0) {
+          filmCarouselFrame.style.height = `${Math.round(width * filmAspectRatio)}px`;
+        }
+      };
+
+      const attachFilmImageLoad = (img) => {
+        if (!img) return;
+        img.addEventListener("load", () => updateFilmFrameHeight(img));
+      };
+
+      attachFilmImageLoad(filmImageA);
+      attachFilmImageLoad(filmImageB);
 
       const showFilmImage = (index) => {
         filmIndex = (index + filmImages.length) % filmImages.length;
@@ -336,10 +355,18 @@
         incoming.src = next;
         incoming.classList.add("is-active");
         outgoing.classList.remove("is-active");
+        if (incoming.complete) {
+          updateFilmFrameHeight(incoming);
+        }
         useA = !useA;
       };
 
       showFilmImage(0);
+      window.addEventListener("resize", () => {
+        if (filmCarouselFrame && filmAspectRatio) {
+          filmCarouselFrame.style.height = `${Math.round(filmCarouselFrame.clientWidth * filmAspectRatio)}px`;
+        }
+      });
       setInterval(() => showFilmImage(filmIndex + 1), 5000);
 
       const droneLightbox = document.querySelector(".drone-lightbox");

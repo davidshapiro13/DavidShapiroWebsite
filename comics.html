@@ -34,16 +34,16 @@
         </div>
       </section>
 
-      <section class="comics-quicknav" aria-label="Comics sections">
-        <a class="comics-quicknav-item" href="#campus-title">
+      <section class="comics-quicknav quicknav" aria-label="Comics sections">
+        <a class="comics-quicknav-item quicknav-item" href="#campus-title">
           <img loading="lazy" src="assets/comics/comics-comics-thumbnail.jpg" alt="Comic projects.">
           <span>Comic Projects</span>
         </a>
-        <a class="comics-quicknav-item" href="#book-illustrations-title">
+        <a class="comics-quicknav-item quicknav-item" href="#book-illustrations-title">
           <img loading="lazy" src="assets/comics/comics-illustration-thumbnail.png" alt="Book illustrations.">
           <span>Book Illustrations</span>
         </a>
-        <a class="comics-quicknav-item" href="#graphic-design-title">
+        <a class="comics-quicknav-item quicknav-item" href="#graphic-design-title">
           <img loading="lazy" src="assets/comics/comics-graphic-thumbnail.png" alt="Graphic design.">
           <span>Graphic Design</span>
         </a>
@@ -107,10 +107,14 @@
             <p class="comics-quote-text">Working with David was a true pleasure for me. He is very bright, catches on very quickly, and is extremely reliable. He does assignments carefully, thoroughly, and on time (often early). His artistic skills are formidable and showed to great advantage in the many figures that he drew for my book. He also points out, gently, errors that I make. I think, based on my experience, one would be hard pressed to find a person to help with art, writing, and administrative issues who is more competent and helpful than David.</p>
           </blockquote>
         </div>
-        <div class="comics-quote-dots" aria-hidden="true">
-          <span class="comics-quote-dot"></span>
-          <span class="comics-quote-dot"></span>
-          <span class="comics-quote-dot"></span>
+        <div class="comics-quote-controls" aria-label="Testimonial controls">
+          <button class="comics-quote-arrow" type="button" id="comics-quote-prev" aria-label="Previous testimonial">←</button>
+          <div class="comics-quote-dots">
+            <button class="comics-quote-dot" type="button" aria-label="Show testimonial 1"></button>
+            <button class="comics-quote-dot" type="button" aria-label="Show testimonial 2"></button>
+            <button class="comics-quote-dot" type="button" aria-label="Show testimonial 3"></button>
+          </div>
+          <button class="comics-quote-arrow" type="button" id="comics-quote-next" aria-label="Next testimonial">→</button>
         </div>
         <div class="panel-grid panel-grid--two">
           <article class="panel panel--full comics-upbringing">
@@ -247,6 +251,8 @@
       if (quoteRotator) {
         const quotes = Array.from(quoteRotator.querySelectorAll(".comics-quote-card"));
         const dots = Array.from(document.querySelectorAll(".comics-quote-dot"));
+        const prevBtn = document.getElementById("comics-quote-prev");
+        const nextBtn = document.getElementById("comics-quote-next");
         let activeIndex = Math.floor(Math.random() * quotes.length);
         
         const syncRotatorHeight = (index) => {
@@ -257,24 +263,29 @@
         };
 
         const showQuote = (index) => {
+          activeIndex = (index + quotes.length) % quotes.length;
           quotes.forEach((quote, i) => {
-            quote.classList.toggle("is-active", i === index);
+            quote.classList.toggle("is-active", i === activeIndex);
           });
           dots.forEach((dot, i) => {
-            dot.classList.toggle("is-active", i === index);
+            dot.classList.toggle("is-active", i === activeIndex);
           });
-          syncRotatorHeight(index);
+          syncRotatorHeight(activeIndex);
         };
 
         showQuote(activeIndex);
 
-        const advanceQuote = () => {
-          activeIndex = (activeIndex + 1) % quotes.length;
-          showQuote(activeIndex);
+        const advanceQuote = (dir = 1) => {
+          showQuote(activeIndex + dir);
         };
 
         window.setInterval(advanceQuote, 30000);
-        quoteRotator.addEventListener("click", advanceQuote);
+        quoteRotator.addEventListener("click", () => advanceQuote(1));
+        dots.forEach((dot, i) => dot.addEventListener("click", () => showQuote(i)));
+        if (prevBtn && nextBtn) {
+          prevBtn.addEventListener("click", () => advanceQuote(-1));
+          nextBtn.addEventListener("click", () => advanceQuote(1));
+        }
         window.addEventListener("resize", () => {
           syncRotatorHeight(activeIndex);
         });
