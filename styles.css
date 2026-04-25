@@ -561,6 +561,19 @@ textarea:focus {
   justify-self: center;
 }
 
+#documentaries .panel--single {
+  grid-column: 1 / -1;
+  max-width: calc((100% - 18px) / 2);
+  width: 100%;
+  justify-self: center;
+}
+
+@media (max-width: 720px) {
+  #documentaries .panel--single {
+    max-width: 100%;
+  }
+}
+
 .panel--spaced {
   margin-top: 20px;
 }
