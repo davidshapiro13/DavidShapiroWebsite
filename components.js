@@ -27,7 +27,13 @@
   const footerMarkup = `
     <footer class="site-footer">
       <div class="site-footer-inner">
-        <p class="small-note">Copyright 2026 by David Shapiro</p>
+        <div class="footer-meta">
+          <p class="small-note">Copyright 2026 by David Shapiro</p>
+          <nav class="footer-legal-links" aria-label="Legal links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+          </nav>
+        </div>
         <div class="hero-socials" aria-label="Social links">
           <a class="hero-social-link" href="https://www.youtube.com/@DavidShapiroAdventures" target="_blank" rel="noopener" aria-label="YouTube">
             <svg viewBox="0 0 24 24" aria-hidden="true">
