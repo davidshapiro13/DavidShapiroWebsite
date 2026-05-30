@@ -2667,6 +2667,30 @@ textarea:focus {
   padding-top: 0;
 }
 
+.legal-main {
+  max-width: 900px;
+}
+
+.legal-doc {
+  display: grid;
+  gap: 14px;
+  line-height: 1.7;
+}
+
+.legal-doc .subtitle {
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  margin: 6px 0 0;
+}
+
+.legal-doc p {
+  margin: 0;
+}
+
+.legal-doc a {
+  color: var(--accent);
+  font-weight: 700;
+}
+
 .contact-top-media {
   margin-bottom: 6px;
   background: #67a9cf;
