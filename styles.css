@@ -1667,6 +1667,14 @@ textarea:focus {
   color: rgba(11, 27, 31, 0.25);
 }
 
+.drone-quote p {
+  margin: 0;
+}
+
+.drone-quote p + p {
+  margin-top: 14px;
+}
+
 .quote-attribution {
   display: block;
   text-align: right;
@@ -2102,7 +2110,7 @@ textarea:focus {
 
 .acting-profile-block {
   display: grid;
-  grid-template-columns: minmax(150px, 200px) minmax(280px, 1fr) minmax(260px, 340px);
+  grid-template-columns: minmax(150px, 200px) minmax(280px, 1fr);
   gap: 18px;
   align-items: center;
   padding: 16px;
