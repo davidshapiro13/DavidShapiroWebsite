@@ -2310,6 +2310,124 @@ textarea:focus {
   }
 }
 
+.testimonial-rotator {
+  position: relative;
+  width: min(100%, 860px);
+  min-height: 240px;
+  margin: 0 auto 28px;
+  transition: height 300ms ease;
+}
+
+.testimonial-card {
+  position: absolute;
+  inset: 0 0 auto;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 20px 28px 24px;
+  border-radius: var(--radius);
+  background: #ffe3cf;
+  box-shadow: 0 12px 24px rgba(11, 27, 31, 0.16);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 700ms ease, transform 700ms ease;
+  pointer-events: none;
+}
+
+.testimonial-card::before {
+  content: "“";
+  position: absolute;
+  left: 12px;
+  top: -14px;
+  font-size: 48px;
+  color: rgba(11, 27, 31, 0.25);
+}
+
+.testimonial-card::after {
+  content: "”";
+  position: absolute;
+  right: 12px;
+  bottom: -26px;
+  font-size: 48px;
+  color: rgba(11, 27, 31, 0.25);
+}
+
+.testimonial-card.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.testimonial-text {
+  margin: 0;
+  font-weight: 400;
+  color: #222222;
+}
+
+.testimonial-attribution {
+  display: block;
+  text-align: right;
+  margin-top: 10px;
+}
+
+.testimonial-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  position: relative;
+  z-index: 2;
+}
+
+.testimonial-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.testimonial-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #d0d0d0;
+}
+
+.testimonial-dot.is-active {
+  background: #1f62ff;
+}
+
+.testimonial-arrow {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(11, 27, 31, 0.35);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 6px 14px rgba(11, 27, 31, 0.16);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+}
+
+@media (max-width: 720px) {
+  .testimonial-rotator {
+    min-height: 360px;
+  }
+
+  .testimonial-card {
+    padding: 18px 18px 24px;
+  }
+
+  .testimonial-controls {
+    gap: 10px;
+  }
+
+  .testimonial-dots {
+    gap: 8px;
+  }
+}
+
 .whats-new .content-block {
   background: #cfe6f4;
 }
@@ -2583,6 +2701,17 @@ textarea:focus {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
+}
+
+.video-card {
+  display: grid;
+  gap: 8px;
+}
+
+.video-title {
+  margin: 0;
+  font-weight: 700;
+  text-align: center;
 }
 
 .video-embed {
