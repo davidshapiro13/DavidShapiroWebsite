@@ -1384,7 +1384,7 @@ textarea:focus {
 }
 
 .filmmaking-carousel .carousel-image {
-  object-fit: contain;
+  object-fit: cover;
   background: transparent;
 }
 
@@ -2452,16 +2452,25 @@ textarea:focus {
 }
 
 .home-interviews-feature {
-  grid-template-columns: minmax(240px, 320px) 1fr;
+  grid-template-columns: minmax(220px, 300px) minmax(220px, 1fr) minmax(220px, 300px);
 }
 
 .home-interviews-media {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
-  max-width: 320px;
+  max-width: 300px;
   width: 100%;
   justify-self: center;
+}
+
+.home-interviews-feature .featured-work-media,
+.home-interviews-feature .featured-work-body {
+  order: initial;
+}
+
+.home-interviews-feature .featured-work-body {
+  text-align: center;
 }
 
 .comics-book .featured-work-media img {
