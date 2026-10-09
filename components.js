@@ -18,6 +18,7 @@
           <a href="acting.html" data-nav>Acting</a>
           <a href="comics.html" data-nav>Comics</a>
           <a href="computers.html" data-nav>Computers</a>
+          <a href="shop.html" data-nav>Shop</a>
           <a href="contact.html" data-nav>Contact</a>
         </nav>
       </div>

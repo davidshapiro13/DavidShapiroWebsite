@@ -1,0 +1,556 @@
+{
+  "available": true,
+  "product": {
+    "title": "Reading Bunny T-shirt | My Day Is Fully Booked",
+    "description": "A reading rabbit, a good book, and a very full schedule. This heavyweight, garment-dyed cotton tee features “My Day Is Fully Booked.”\n\nRelaxed fit · 100% ring-spun cotton · Sizes S–4XL\n\nMachine wash cold. Do not bleach. Tumble dry on low.",
+    "defaultVariantId": 79048,
+    "currency": "usd",
+    "shipping": 495,
+    "countries": [
+      "US"
+    ],
+    "testMode": true,
+    "checkoutEnabled": false,
+    "images": [
+      {
+        "src": "https://images-api.printify.com/mockup/6a4fe213435f537ab70d3111/79048/98445/reading-bunny-t-shirt-my-day-is-fully-booked.jpg?camera_label=front",
+        "variantIds": [
+          79155,
+          79048,
+          79049,
+          79046,
+          79047,
+          79050,
+          101463
+        ]
+      },
+      {
+        "src": "https://images-api.printify.com/mockup/6a4fe213435f537ab70d3111/79048/98446/reading-bunny-t-shirt-my-day-is-fully-booked.jpg?camera_label=back",
+        "variantIds": [
+          79155,
+          79048,
+          79049,
+          79046,
+          79047,
+          79050,
+          101463
+        ]
+      },
+      {
+        "src": "https://images-api.printify.com/mockup/6a4fe213435f537ab70d3111/79048/100629/reading-bunny-t-shirt-my-day-is-fully-booked.jpg?camera_label=folded",
+        "variantIds": [
+          79155,
+          79048,
+          79049,
+          79046,
+          79047,
+          79050,
+          101463
+        ]
+      },
+      {
+        "src": "https://images-api.printify.com/mockup/6a4fe213435f537ab70d3111/79048/126095/reading-bunny-t-shirt-my-day-is-fully-booked.jpg?camera_label=person-5-context",
+        "variantIds": [
+          79155,
+          79048,
+          79049,
+          79046,
+          79047,
+          79050,
+          101463
+        ]
+      },
+      {
+        "src": "https://images-api.printify.com/mockup/6a4fe213435f537ab70d3111/79018/98445/reading-bunny-t-shirt-my-day-is-fully-booked.jpg?camera_label=front",
+        "variantIds": [
+          79148,
+          79017,
+          79016,
+          79019,
+          79018,
+          79020,
+          101456
+        ]
+      },
+      {
+        "src": "https://images-api.printify.com/mockup/6a4fe213435f537ab70d3111/79018/98446/reading-bunny-t-shirt-my-day-is-fully-booked.jpg?camera_label=back",
+        "variantIds": [
+          79148,
+          79017,
+          79016,
+          79019,
+          79018,
+          79020,
+          101456
+        ]
+      },
+      {
+        "src": "https://images-api.printify.com/mockup/6a4fe213435f537ab70d3111/79018/100629/reading-bunny-t-shirt-my-day-is-fully-booked.jpg?camera_label=folded",
+        "variantIds": [
+          79148,
+          79017,
+          79016,
+          79019,
+          79018,
+          79020,
+          101456
+        ]
+      },
+      {
+        "src": "https://images-api.printify.com/mockup/6a4fe213435f537ab70d3111/79018/126095/reading-bunny-t-shirt-my-day-is-fully-booked.jpg?camera_label=person-5-context",
+        "variantIds": [
+          79148,
+          79017,
+          79016,
+          79019,
+          79018,
+          79020,
+          101456
+        ]
+      },
+      {
+        "src": "https://images-api.printify.com/mockup/6a4fe213435f537ab70d3111/73204/98445/reading-bunny-t-shirt-my-day-is-fully-booked.jpg?camera_label=front",
+        "variantIds": [
+          79114,
+          73204,
+          73208,
+          73200,
+          73196,
+          73212,
+          101423
+        ]
+      },
+      {
+        "src": "https://images-api.printify.com/mockup/6a4fe213435f537ab70d3111/73204/98446/reading-bunny-t-shirt-my-day-is-fully-booked.jpg?camera_label=back",
+        "variantIds": [
+          79114,
+          73204,
+          73208,
+          73200,
+          73196,
+          73212,
+          101423
+        ]
+      },
+      {
+        "src": "https://images-api.printify.com/mockup/6a4fe213435f537ab70d3111/73204/100629/reading-bunny-t-shirt-my-day-is-fully-booked.jpg?camera_label=folded",
+        "variantIds": [
+          79114,
+          73204,
+          73208,
+          73200,
+          73196,
+          73212,
+          101423
+        ]
+      },
+      {
+        "src": "https://images-api.printify.com/mockup/6a4fe213435f537ab70d3111/73204/126095/reading-bunny-t-shirt-my-day-is-fully-booked.jpg?camera_label=person-5-context",
+        "variantIds": [
+          79114,
+          73204,
+          73208,
+          73200,
+          73196,
+          73212,
+          101423
+        ]
+      },
+      {
+        "src": "https://images-api.printify.com/mockup/6a4fe213435f537ab70d3111/73205/98445/reading-bunny-t-shirt-my-day-is-fully-booked.jpg?camera_label=front",
+        "variantIds": [
+          79152,
+          73197,
+          73209,
+          73201,
+          73205,
+          73213,
+          101460
+        ]
+      },
+      {
+        "src": "https://images-api.printify.com/mockup/6a4fe213435f537ab70d3111/73205/98446/reading-bunny-t-shirt-my-day-is-fully-booked.jpg?camera_label=back",
+        "variantIds": [
+          79152,
+          73197,
+          73209,
+          73201,
+          73205,
+          73213,
+          101460
+        ]
+      },
+      {
+        "src": "https://images-api.printify.com/mockup/6a4fe213435f537ab70d3111/73205/100629/reading-bunny-t-shirt-my-day-is-fully-booked.jpg?camera_label=folded",
+        "variantIds": [
+          79152,
+          73197,
+          73209,
+          73201,
+          73205,
+          73213,
+          101460
+        ]
+      },
+      {
+        "src": "https://images-api.printify.com/mockup/6a4fe213435f537ab70d3111/73205/126095/reading-bunny-t-shirt-my-day-is-fully-booked.jpg?camera_label=person-5-context",
+        "variantIds": [
+          79152,
+          73197,
+          73209,
+          73201,
+          73205,
+          73213,
+          101460
+        ]
+      }
+    ],
+    "variants": [
+      {
+        "id": 73196,
+        "title": "S / Black",
+        "price": 2000,
+        "color": "Black",
+        "size": "S"
+      },
+      {
+        "id": 73197,
+        "title": "S / Navy",
+        "price": 2000,
+        "color": "Navy",
+        "size": "S"
+      },
+      {
+        "id": 79016,
+        "title": "S / Midnight",
+        "price": 2000,
+        "color": "Midnight",
+        "size": "S"
+      },
+      {
+        "id": 79046,
+        "title": "S / Pepper",
+        "price": 2000,
+        "color": "Pepper",
+        "size": "S"
+      },
+      {
+        "id": 73200,
+        "title": "M / Black",
+        "price": 2000,
+        "color": "Black",
+        "size": "M"
+      },
+      {
+        "id": 73201,
+        "title": "M / Navy",
+        "price": 2000,
+        "color": "Navy",
+        "size": "M"
+      },
+      {
+        "id": 79017,
+        "title": "M / Midnight",
+        "price": 2000,
+        "color": "Midnight",
+        "size": "M"
+      },
+      {
+        "id": 79047,
+        "title": "M / Pepper",
+        "price": 2000,
+        "color": "Pepper",
+        "size": "M"
+      },
+      {
+        "id": 73204,
+        "title": "L / Black",
+        "price": 2000,
+        "color": "Black",
+        "size": "L"
+      },
+      {
+        "id": 73205,
+        "title": "L / Navy",
+        "price": 2000,
+        "color": "Navy",
+        "size": "L"
+      },
+      {
+        "id": 79018,
+        "title": "L / Midnight",
+        "price": 2000,
+        "color": "Midnight",
+        "size": "L"
+      },
+      {
+        "id": 79048,
+        "title": "L / Pepper",
+        "price": 2000,
+        "color": "Pepper",
+        "size": "L"
+      },
+      {
+        "id": 73208,
+        "title": "XL / Black",
+        "price": 2000,
+        "color": "Black",
+        "size": "XL"
+      },
+      {
+        "id": 73209,
+        "title": "XL / Navy",
+        "price": 2000,
+        "color": "Navy",
+        "size": "XL"
+      },
+      {
+        "id": 79019,
+        "title": "XL / Midnight",
+        "price": 2000,
+        "color": "Midnight",
+        "size": "XL"
+      },
+      {
+        "id": 79049,
+        "title": "XL / Pepper",
+        "price": 2000,
+        "color": "Pepper",
+        "size": "XL"
+      },
+      {
+        "id": 73212,
+        "title": "2XL / Black",
+        "price": 2000,
+        "color": "Black",
+        "size": "2XL"
+      },
+      {
+        "id": 73213,
+        "title": "2XL / Navy",
+        "price": 2000,
+        "color": "Navy",
+        "size": "2XL"
+      },
+      {
+        "id": 79020,
+        "title": "2XL / Midnight",
+        "price": 2000,
+        "color": "Midnight",
+        "size": "2XL"
+      },
+      {
+        "id": 79050,
+        "title": "2XL / Pepper",
+        "price": 2000,
+        "color": "Pepper",
+        "size": "2XL"
+      },
+      {
+        "id": 79114,
+        "title": "3XL / Black",
+        "price": 2000,
+        "color": "Black",
+        "size": "3XL"
+      },
+      {
+        "id": 79148,
+        "title": "3XL / Midnight",
+        "price": 2000,
+        "color": "Midnight",
+        "size": "3XL"
+      },
+      {
+        "id": 79152,
+        "title": "3XL / Navy",
+        "price": 2000,
+        "color": "Navy",
+        "size": "3XL"
+      },
+      {
+        "id": 79155,
+        "title": "3XL / Pepper",
+        "price": 2000,
+        "color": "Pepper",
+        "size": "3XL"
+      },
+      {
+        "id": 101423,
+        "title": "4XL / Black",
+        "price": 2000,
+        "color": "Black",
+        "size": "4XL"
+      },
+      {
+        "id": 101456,
+        "title": "4XL / Midnight",
+        "price": 2000,
+        "color": "Midnight",
+        "size": "4XL"
+      },
+      {
+        "id": 101460,
+        "title": "4XL / Navy",
+        "price": 2000,
+        "color": "Navy",
+        "size": "4XL"
+      },
+      {
+        "id": 101463,
+        "title": "4XL / Pepper",
+        "price": 2000,
+        "color": "Pepper",
+        "size": "4XL"
+      }
+    ],
+    "sizeGuide": {
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "2XL",
+        "3XL",
+        "4XL"
+      ],
+      "types": [
+        {
+          "name": "Width",
+          "units": "length",
+          "ranges": [
+            {
+              "from": "463.55",
+              "to": ""
+            },
+            {
+              "from": "514.35",
+              "to": ""
+            },
+            {
+              "from": "558.8",
+              "to": ""
+            },
+            {
+              "from": "609.6",
+              "to": ""
+            },
+            {
+              "from": "660.4",
+              "to": ""
+            },
+            {
+              "from": "704.85",
+              "to": ""
+            },
+            {
+              "from": "755.65",
+              "to": ""
+            }
+          ]
+        },
+        {
+          "name": "Length",
+          "units": "length",
+          "ranges": [
+            {
+              "from": "676.275",
+              "to": ""
+            },
+            {
+              "from": "711.2",
+              "to": ""
+            },
+            {
+              "from": "746.125",
+              "to": ""
+            },
+            {
+              "from": "781.05",
+              "to": ""
+            },
+            {
+              "from": "803.275",
+              "to": ""
+            },
+            {
+              "from": "825.5",
+              "to": ""
+            },
+            {
+              "from": "850.9",
+              "to": ""
+            }
+          ]
+        },
+        {
+          "name": "Sleeve length from center back",
+          "units": "length",
+          "ranges": [
+            {
+              "from": "412.75",
+              "to": ""
+            },
+            {
+              "from": "450.85",
+              "to": ""
+            },
+            {
+              "from": "482.6",
+              "to": ""
+            },
+            {
+              "from": "520.7",
+              "to": ""
+            },
+            {
+              "from": "552.45",
+              "to": ""
+            },
+            {
+              "from": "590.55",
+              "to": ""
+            },
+            {
+              "from": "625.6",
+              "to": ""
+            }
+          ]
+        },
+        {
+          "name": "Size tolerance",
+          "units": "length",
+          "ranges": [
+            {
+              "from": "38.1",
+              "to": ""
+            },
+            {
+              "from": "38.1",
+              "to": ""
+            },
+            {
+              "from": "38.1",
+              "to": ""
+            },
+            {
+              "from": "38.1",
+              "to": ""
+            },
+            {
+              "from": "38.1",
+              "to": ""
+            },
+            {
+              "from": "38.1",
+              "to": ""
+            },
+            {
+              "from": "38.1",
+              "to": ""
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

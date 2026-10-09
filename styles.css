@@ -3776,3 +3776,8 @@ textarea:focus {
     font-size: 30px;
   }
 }
+
+/* Featured shirt */
+.home-shirt-feature { display: grid; grid-template-columns: minmax(220px, 360px) 1fr; gap: 28px; align-items: center; }
+.home-shirt-photo img { width: 100%; border: 2px solid var(--border); border-radius: var(--radius); }
+@media (max-width: 680px) { .home-shirt-feature { grid-template-columns: 1fr; } }

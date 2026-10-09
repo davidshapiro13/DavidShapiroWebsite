@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <title>David Shapiro | Your Order</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="shop.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div data-component="header"></div>
+    <main id="main" class="main shop-main">
+      <section class="content-block shop-order" aria-labelledby="order-title">
+        <p class="shop-eyebrow">The Shop</p>
+        <h2 id="order-title">Checking your order</h2>
+        <p id="order-message" role="status" aria-live="polite">Waiting for payment confirmation…</p>
+        <p id="order-reference" hidden></p>
+        <div id="order-tracking"></div>
+        <p><button type="button" id="order-refresh" class="btn">Refresh status</button></p>
+        <p class="shop-small">Need help? <a href="contact.html">Contact David</a> and include your order reference.</p>
+        <p><a href="shop.html">Back to the shop</a></p>
+      </section>
+      <noscript><p>Please enable JavaScript to check your order status.</p></noscript>
+    </main>
+    <div data-component="footer"></div>
+    <script src="components.js?v=20261008"></script>
+    <script src="shop-config.js?v=20261007"></script>
+    <script src="order.js?v=20261007" defer></script>
+  </body>
+</html>

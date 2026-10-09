@@ -1,0 +1,14 @@
+.DS_Store
+node_modules/
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+.wrangler/
+commerce/dist/
+commerce/test-results/
+commerce/playwright-report/
+!.dev.vars.example
+
+commerce/.local/

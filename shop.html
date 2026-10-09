@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Shop David Shapiro's latest shirt.">
+    <meta name="referrer" content="no-referrer">
+    <title>David Shapiro | Shop</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="shop.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div data-component="header"></div>
+    <main id="main" class="main shop-main">
+      <header class="shop-heading">
+        <p class="shop-eyebrow">From David</p>
+        <h2 class="section-title">The Shop</h2>
+        <p>For days best spent with a good book.</p>
+      </header>
+      <p id="shop-notice" class="shop-notice" role="status" hidden></p>
+      <section id="shop-loading" class="content-block shop-empty" aria-live="polite">
+        <h3>Getting the shop ready</h3>
+        <p id="shop-loading-text">Loading the latest shirt…</p>
+        <p><a href="contact.html">Questions? Get in touch with David.</a></p>
+      </section>
+      <section id="shop-product" class="shop-product" aria-labelledby="product-title" hidden>
+        <div class="shop-gallery">
+          <div class="shop-image-frame"><img id="product-image" alt="" hidden><p id="image-unavailable" hidden>Product photo coming soon.</p></div>
+          <div id="product-thumbnails" class="shop-thumbnails" aria-label="Product photos"></div>
+        </div>
+        <div class="content-block shop-details">
+          <p class="shop-eyebrow">David's latest shirt</p>
+          <h3 id="product-title"></h3>
+          <p id="product-price" class="shop-price"></p>
+          <p id="product-description"></p>
+          <form id="shop-form">
+            <div id="color-field" class="shop-field">
+              <label for="shirt-color">Color</label>
+              <select id="shirt-color" name="color" required></select>
+            </div>
+            <div class="shop-field">
+              <label for="shirt-size">Size</label>
+              <select id="shirt-size" name="size" required></select>
+            </div>
+            <p id="shipping-note" class="shop-small"></p>
+            <p id="checkout-message" class="shop-message" role="status" aria-live="polite"></p>
+            <button id="buy-shirt" class="btn shop-buy" type="submit" disabled>Buy the Shirt</button>
+            <p class="shop-small">Secure payment through Stripe. Your card details go directly to Stripe.</p>
+          </form>
+          <details id="size-guide" hidden>
+            <summary>Size guide</summary>
+            <div id="size-guide-table" class="shop-table-wrap"></div>
+          </details>
+          <details>
+            <summary>Shipping &amp; order questions</summary>
+            <p>Your shirt is printed to order by Printify. Shipping charges and any applicable tax appear before you pay.</p>
+            <p>For sizing, delivery, or help with an order, <a href="contact.html">contact David</a>.</p>
+          </details>
+          <p class="shop-small"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+        </div>
+      </section>
+      <noscript><p class="content-block">Please enable JavaScript to choose a shirt size and check out. You can also <a href="contact.html">contact David</a> for help.</p></noscript>
+    </main>
+    <div data-component="footer"></div>
+    <script src="components.js?v=20261008"></script>
+    <script src="shop-config.js?v=20261007"></script>
+    <script src="shop.js?v=20261007" defer></script>
+  </body>
+</html>

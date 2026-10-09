@@ -1,0 +1,10 @@
+# GitHub Pages publishes the storefront only; the Worker is deployed separately.
+exclude:
+  - commerce
+  - node_modules
+  - Plan
+  - "Things David needs to do.md"
+  - README.md
+  - AGENTS.md
+  - .dev.vars
+  - .env
