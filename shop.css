@@ -1,8 +1,11 @@
 .shop-main { padding-bottom: 48px; }
 .shop-main [hidden] { display: none !important; }
-.shop-heading { text-align: center; margin: 24px auto 36px; }
-.shop-heading .section-title { margin: 0; }
-.shop-heading > p:last-child { margin-top: 8px; }
+.shop-front { padding-top: 0; }
+.shop-top-media { background: #67a9cf; }
+.shop-top-media img { display: block; width: 100%; height: min(62vw, 560px); object-fit: cover; object-position: center 48%; }
+.shop-top-title { top: 50%; font-size: clamp(46px, 9vw, 100px); font-weight: 400; white-space: nowrap; }
+.shop-top-media.hero-media--fade img { -webkit-mask-image: linear-gradient(to bottom, #000 75%, transparent 100%); mask-image: linear-gradient(to bottom, #000 75%, transparent 100%); }
+.shop-intro { text-align: center; margin: 12px auto 36px; }
 .shop-eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: 15px; font-weight: 700; margin: 0 0 8px; }
 .shop-product { display: grid; grid-template-columns: 1.05fr 1fr; gap: 28px; align-items: start; }
 .shop-image-frame { background: #f5f9fb; border: 2px solid var(--border); border-radius: var(--radius); aspect-ratio: 1; display: grid; place-items: center; overflow: hidden; }
@@ -37,7 +40,7 @@
 .shop-home-feature { text-align: center; }
 @media (max-width: 760px) {
   .shop-product { grid-template-columns: 1fr; gap: 20px; }
-  .shop-heading { margin-bottom: 24px; }
+  .shop-intro { margin-bottom: 24px; }
   .shop-details { padding: 22px; }
   .shop-order { padding: 24px; }
 }

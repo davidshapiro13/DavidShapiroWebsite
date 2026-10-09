@@ -72,6 +72,18 @@ test('live checkout requires a live key and enabled fulfillment', () => {
   assert.throws(() => checkoutConfig(f.env));
 });
 
+test('restricted keys work only in their matching mode; publishable keys are rejected', () => {
+  for (const live of [false, true]) {
+    const f = fixture(live);
+    f.env.STRIPE_SECRET_KEY = live ? 'rk_live_fake' : 'rk_test_fake';
+    assert.equal(checkoutConfig(f.env).live, live);
+    for (const key of [live ? 'rk_test_fake' : 'rk_live_fake', 'pk_live_fake', 'pk_test_fake']) {
+      f.env.STRIPE_SECRET_KEY = key;
+      assert.throws(() => checkoutConfig(f.env));
+    }
+  }
+});
+
 test('test payments NEVER submit an order to Printify even with fulfillment enabled', async () => {
   const f = fixture(); await f.paidOrder(); await fulfill(id, f.deps);
   assert.equal(f.calls.orders.length, 0);

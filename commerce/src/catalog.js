@@ -13,7 +13,7 @@ export function checkoutConfig(env) {
   }
   if (!['test', 'live'].includes(env.PAYMENT_MODE)) throw new Error('Invalid payment mode');
   const live = env.PAYMENT_MODE === 'live';
-  if (!env.STRIPE_SECRET_KEY?.startsWith(live ? 'sk_live_' : 'sk_test_')) throw new Error('Payment key mode mismatch');
+  if (!(live ? /^(sk|rk)_live_/ : /^(sk|rk)_test_/).test(env.STRIPE_SECRET_KEY || '')) throw new Error('Payment key mode mismatch');
   if (!env.STRIPE_WEBHOOK_SECRET || !env.PRINTIFY_API_TOKEN || !env.PRINTIFY_SHOP_ID || !env.PRINTIFY_PRODUCT_ID || !env.DB) {
     throw new Error('Store is not configured');
   }

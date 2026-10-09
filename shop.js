@@ -9,7 +9,13 @@
   function option(value, label) { const el = document.createElement('option'); el.value = value; el.textContent = label; return el; }
   function images() {
     const matching = product.images.filter(i => !i.variantIds.length || i.variantIds.includes(variant?.id));
-    const choices = matching.length ? matching : product.images;
+    // Lead with the folded mockup for the selected color, retaining the other views.
+    const folded = item => {
+      try { return new URL(item.src).searchParams.get('camera_label') === 'folded'; }
+      catch { return false; }
+    };
+    const choices = [...(matching.length ? matching : product.images)]
+      .sort((a, b) => Number(folded(b)) - Number(folded(a)));
     $('product-thumbnails').replaceChildren();
     $('product-image').hidden = choices.length === 0;
     $('image-unavailable').hidden = choices.length !== 0;
