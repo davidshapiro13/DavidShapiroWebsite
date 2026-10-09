@@ -18,7 +18,7 @@ The existing static website stays on its current host. `shop.html` talks to a se
 - Add `STRIPE_LIVE_SECRET_KEY` privately in `.dev.vars`; keep the existing sandbox key for testing. Configure the live webhook and upload its matching secret before switching `PAYMENT_MODE`.
 - Confirm the live Stripe account can accept charges and its tax settings are active.
 - Confirm Printify billing and automatic order approval for shop `28189423`.
-- Approve and publish the customer return policy.
+- Customer return policy approved: report damaged, defective, or incorrect shirts within 30 days of delivery; no change-of-mind or incorrect-size returns. Published on the shop and terms pages.
 - Only then enable live checkout and fulfillment together. No real purchase has been made.
 
 ## Required launch information
