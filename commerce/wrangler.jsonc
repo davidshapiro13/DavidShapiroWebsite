@@ -17,9 +17,9 @@
   },
   "vars": {
     "SITE_ORIGIN": "https://davidsshapiro.com",
-    "CHECKOUT_ENABLED": "false",
-    "FULFILLMENT_ENABLED": "false",
-    "PAYMENT_MODE": "test",
+    "CHECKOUT_ENABLED": "true",
+    "FULFILLMENT_ENABLED": "true",
+    "PAYMENT_MODE": "live",
     "PRINTIFY_SHOP_ID": "28189423",
     "PRINTIFY_PRODUCT_ID": "6a4fe213435f537ab70d3111",
     "RETAIL_PRICE_CENTS": "2000",
@@ -27,7 +27,7 @@
     "SHIPPING_CENTS": "495",
     "STRIPE_TAX_CODE": "txcd_30011000",
     "AUTOMATIC_TAX": "true",
-    "PRODUCT_DESCRIPTION": "A reading rabbit, a good book, and a very full schedule. This heavyweight, garment-dyed cotton tee features “My Day Is Fully Booked.”\n\nRelaxed fit · 100% ring-spun cotton · Sizes S–4XL\n\nMachine wash cold. Do not bleach. Tumble dry on low."
+    "PRODUCT_DESCRIPTION": "A reading rabbit, a good book, and a very full schedule. This heavyweight, garment-dyed cotton tee features \u201cMy Day Is Fully Booked.\u201d\n\nRelaxed fit \u00b7 100% ring-spun cotton \u00b7 Sizes S\u20134XL\n\nMachine wash cold. Do not bleach. Tumble dry on low."
   },
   "d1_databases": [
     {

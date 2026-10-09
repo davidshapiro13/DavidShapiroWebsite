@@ -2,7 +2,7 @@
 
 The existing static website stays on its current host. `shop.html` talks to a separate Cloudflare Worker. Stripe hosts the payment page; Printify fulfills the paid order. The Worker uses D1 for a small order ledger and a five-minute scheduled recovery job.
 
-**Current state (October 8, 2026):** backend deployed at `https://david-shirt-shop.david-shirt-shop.workers.dev`, Cloudflare D1 initialized, Printify credentials connected, and Stripe test webhook configured. Checkout and fulfillment remain disabled. The storefront is included in the GitHub Pages website; `_config.yml` excludes the backend directory from the published site. Stripe test tax settings are active. A real hosted Stripe sandbox checkout passed: $20 shirt + $4.95 shipping, signed webhook received, D1 state `test_complete`, `live=0`, and no Printify order ID. The local confirmation page was served through a browser route for that sandbox test. The selected product is `6a4fe213435f537ab70d3111`. The seller approved a $20 shirt price and US-only shipping. `RETAIL_PRICE_CENTS=2000` sets the same retail price for all enabled variants, independently of Printify’s retail prices. Artwork and options load from Printify; the seller approved $4.95 standard shipping, matching the Printify quote for a sample US address. Automated browser tests use fixtures; the additional hosted checkout test exercised the deployed backend and actual Stripe sandbox.
+**Current state (October 8, 2026):** backend deployed at `https://david-shirt-shop.david-shirt-shop.workers.dev`, Cloudflare D1 initialized, Printify credentials connected, and Stripe test webhook configured. Live checkout and fulfillment are enabled. The storefront is included in the GitHub Pages website; `_config.yml` excludes the backend directory from the published site. Stripe test tax settings are active. A real hosted Stripe sandbox checkout passed: $20 shirt + $4.95 shipping, signed webhook received, D1 state `test_complete`, `live=0`, and no Printify order ID. The local confirmation page was served through a browser route for that sandbox test. The selected product is `6a4fe213435f537ab70d3111`. The seller approved a $20 shirt price and US-only shipping. `RETAIL_PRICE_CENTS=2000` sets the same retail price for all enabled variants, independently of Printify’s retail prices. Artwork and options load from Printify; the seller approved $4.95 standard shipping, matching the Printify quote for a sample US address. Automated browser tests use fixtures; the additional hosted checkout test exercised the deployed backend and actual Stripe sandbox.
 
 ## What is built
 
@@ -13,13 +13,14 @@ The existing static website stays on its current host. `shop.html` talks to a se
 - `migrations/0001_orders.sql`: order references, product IDs, amounts, and processing states. No names, addresses, phone numbers, emails, or card data.
 - `test/`: real SQLite ledger tests, Stripe signature tests, provider fixtures, and desktop/mobile browser tests.
 
-## Remaining activation steps
+## Live activation record
 
 - Live restricted key is saved privately as `STRIPE_LIVE_SECRET_KEY`. Live webhook is created and its signing secret saved as `STRIPE_LIVE_WEBHOOK_SECRET`. Run `node --env-file=.dev.vars scripts/connect-live.mjs --connect` while both enable flags are false to upload live credentials before switching `PAYMENT_MODE`. The script without `--connect` checks readiness and prepares the webhook only.
 - Live Stripe charges, payouts, and tax settings were verified active. Restricted server keys (`rk_live_` / `rk_test_`) are supported alongside standard secret keys; permissions must allow Checkout writes and the required payment/webhook reads.
-- Confirm Printify billing and automatic order approval for shop `28189423`.
+- Seller confirmed Printify billing and automatic order approval for shop `28189423`.
 - Customer return policy approved: report damaged, defective, or incorrect shirts within 30 days of delivery; no change-of-mind or incorrect-size returns. Published on the shop and terms pages.
-- Only then enable live checkout and fulfillment together. No real purchase has been made.
+- Live credentials uploaded and `PAYMENT_MODE=live`, `CHECKOUT_ENABLED=true`, and `FULFILLMENT_ENABLED=true` deployed. The published Buy button opened a live Stripe checkout for $20 + $4.95 US shipping with automatic tax. The verification session was expired unpaid; no real purchase or Printify fulfillment has been tested.
+- `scripts/verify-live.mjs` verifies the live catalog and webhook signature, opens one unpaid checkout through the public Buy button, then expires it. Run with `node --env-file=.dev.vars scripts/verify-live.mjs`.
 
 ## Required launch information
 
