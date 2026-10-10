@@ -125,8 +125,20 @@ textarea:focus {
 
 .nav {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.nav-group--work {
+  border-inline: 1px solid rgba(11, 27, 31, 0.3);
+  padding-inline: 10px;
+  font-weight: 700;
 }
 
 .nav-toggle {
@@ -449,7 +461,7 @@ textarea:focus {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1100px) {
   .site-header-inner {
     flex-wrap: nowrap;
     align-items: center;
@@ -498,6 +510,25 @@ textarea:focus {
     text-align: left;
   }
 
+  .nav-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+  }
+
+  .nav-group--work {
+    border-inline: 0;
+    border-block: 1px solid rgba(11, 27, 31, 0.3);
+    padding: 8px 0;
+  }
+
+  .site-header.is-open .nav {
+    max-height: calc(100dvh - 68px);
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 720px) {
   .panel-grid--three {
     grid-template-columns: 1fr;
   }

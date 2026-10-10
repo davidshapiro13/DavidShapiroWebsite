@@ -12,14 +12,20 @@
           <span class="visually-hidden">Toggle menu</span>
         </button>
         <nav class="nav" id="primary-nav" aria-label="Primary">
-          <a href="index.html" data-nav>Home</a>
-          <a href="about.html" data-nav>About</a>
-          <a href="filmmaking.html" data-nav>Filmmaking</a>
-          <a href="acting.html" data-nav>Acting</a>
-          <a href="comics.html" data-nav>Comics</a>
-          <a href="computers.html" data-nav>Computers</a>
-          <a href="shop.html" data-nav>Shop</a>
-          <a href="contact.html" data-nav>Contact</a>
+          <div class="nav-group">
+            <a href="index.html" data-nav>Home</a>
+            <a href="about.html" data-nav>About</a>
+          </div>
+          <div class="nav-group nav-group--work">
+            <a href="filmmaking.html" data-nav>Filmmaking</a>
+            <a href="acting.html" data-nav>Acting</a>
+            <a href="computers.html" data-nav>Computers</a>
+            <a href="comics.html" data-nav>Cartooning</a>
+          </div>
+          <div class="nav-group">
+            <a href="shop.html" data-nav>Shop</a>
+            <a href="contact.html" data-nav>Contact</a>
+          </div>
         </nav>
       </div>
     </header>
