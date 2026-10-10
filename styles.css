@@ -138,7 +138,6 @@ textarea:focus {
 .nav-group--work {
   border-inline: 1px solid rgba(11, 27, 31, 0.3);
   padding-inline: 10px;
-  font-weight: 700;
 }
 
 .nav-toggle {
