@@ -3,7 +3,7 @@
     <header class="site-header">
       <div class="site-header-inner">
         <div class="site-header-brand">
-          <h1 class="site-title">David Shapiro</h1>
+          <h1 class="site-title"><a href="index.html" class="site-home-link">David Shapiro</a></h1>
         </div>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
           <svg class="nav-toggle-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -24,6 +24,7 @@
           </div>
           <div class="nav-group">
             <a href="shop.html" data-nav>Shop</a>
+            <a href="hire.html" data-nav>Hire</a>
             <a href="contact.html" data-nav>Contact</a>
           </div>
         </nav>

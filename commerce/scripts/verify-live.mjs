@@ -53,6 +53,10 @@ try {
  stage = 'stripe_page';
  await page.waitForURL('https://checkout.stripe.com/**', { timeout: 60000 });
  await page.locator('#email').waitFor({ timeout: 60000 });
+ await page.locator('#shippingName').waitFor({ state: 'visible', timeout: 30000 });
+ await page.locator('#shippingAddressLine1').waitFor({ state: 'visible', timeout: 30000 });
+ await page.screenshot({ path: '.local/live-shipping-checkout.png', fullPage: true });
+ console.log('Shipping name and address fields are visible on live Stripe checkout.');
  console.log('Published Buy button opens live Stripe checkout: $20 shirt + $4.95 US shipping, automatic tax enabled. No payment submitted.');
 } catch (error) {
  console.error(JSON.stringify({ verificationFailed: true, stage, type: error.type || error.name, code: error.code || null, status: error.statusCode || null }));

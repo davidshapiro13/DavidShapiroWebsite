@@ -113,10 +113,11 @@ textarea:focus {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  flex: 1 1 auto;
+  flex: 1 0 auto;
 }
 
 .site-title {
+  white-space: nowrap;
   font-size: 28px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -3811,3 +3812,8 @@ textarea:focus {
 .home-shirt-feature { display: grid; grid-template-columns: minmax(220px, 360px) 1fr; gap: 28px; align-items: center; }
 .home-shirt-photo img { width: 100%; border: 2px solid var(--border); border-radius: var(--radius); }
 @media (max-width: 680px) { .home-shirt-feature { grid-template-columns: 1fr; } }
+
+.site-home-link {
+  color: inherit;
+  text-decoration: none;
+}

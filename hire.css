@@ -1,0 +1,144 @@
+.hire-main {
+  width: 100%;
+  padding-top: 0;
+  gap: 48px;
+}
+
+.hire-hero {
+  text-align: center;
+  padding: 0 0 24px;
+}
+
+/* Same full-width photo treatment as the other interior pages. */
+.hire-top-media {
+  background: var(--bg);
+}
+
+.hire-top-media img {
+  width: 100%;
+  height: min(60vw, 560px);
+  object-fit: cover;
+  object-position: center 20%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+}
+
+.hire-top-title {
+  top: 52%;
+  width: 100%;
+  font-size: clamp(36px, 8vw, 100px);
+  line-height: 1.2;
+}
+
+.hire-slogan {
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.3;
+  margin: 0 auto 24px;
+  font-weight: 700;
+}
+
+.hire-intro {
+  text-align: center;
+  margin: 0 auto 26px;
+}
+
+.hire-work-link {
+  text-underline-offset: 5px;
+  font-size: 18px;
+}
+
+.hire-section {
+  scroll-margin-top: 100px;
+}
+
+.hire-section-intro {
+  text-align: center;
+  margin: 0 0 24px;
+}
+
+.hire-project h3 {
+  margin-bottom: 16px;
+}
+
+.hire-video-placeholder {
+  aspect-ratio: 16 / 9;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  border: 1px dashed var(--accent);
+  background: linear-gradient(135deg, #e8f4fb, #b5d9ec);
+  color: #244956;
+  font-size: 16px;
+}
+
+.hire-project .hire-project-description {
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+.hire-social {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  align-items: center;
+  padding: 28px;
+}
+
+.hire-social h2,
+.hire-consult h2 {
+  font-size: var(--section-title-size);
+  line-height: 1.25;
+  margin: 0 0 16px;
+}
+
+.hire-social p {
+  margin: 0;
+}
+
+.hire-social-note {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.hire-consult {
+  text-align: center;
+  padding: 36px 24px;
+}
+
+.hire-consult > p {
+  max-width: 700px;
+  margin: 0 auto 24px;
+}
+
+.hire-consult .btn-wrap {
+  margin-bottom: 0;
+}
+
+@media (max-width: 720px) {
+  .hire-main { gap: 36px; }
+  .hire-hero { padding-top: 20px; }
+  .hire-social { grid-template-columns: 1fr; gap: 24px; padding: 22px; }
+}
+
+.hire-testimonial {
+  background: #ffe3cf;
+  margin: 0;
+  text-align: center;
+  padding: 28px;
+}
+
+.hire-testimonial blockquote {
+  margin: 0 auto 18px;
+  max-width: 850px;
+}
+
+.hire-testimonial blockquote p {
+  margin: 0;
+}
+
+.hire-testimonial figcaption {
+  font-size: 18px;
+}
