@@ -445,6 +445,31 @@ textarea:focus {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.panel-grid--four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.adventure-group {
+  margin-bottom: 32px;
+}
+
+.adventure-subheading {
+  margin: 0 0 18px;
+  font-size: 26px;
+}
+
+@media (max-width: 980px) {
+  .panel-grid--four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .panel-grid--four {
+    grid-template-columns: 1fr;
+  }
+}
+
 .panel-grid--single {
   grid-template-columns: 1fr;
 }
@@ -633,7 +658,8 @@ textarea:focus {
   box-shadow: 0 14px 32px rgba(11, 27, 31, 0.3);
 }
 
-.panel h3 {
+.panel h3,
+.adventure-group .panel h4 {
   margin-top: 0;
   font-size: var(--subtitle-size);
   text-align: center;
@@ -3810,7 +3836,7 @@ textarea:focus {
 
 /* Featured shirt */
 .home-shirt-feature { display: grid; grid-template-columns: minmax(220px, 360px) 1fr; gap: 28px; align-items: center; }
-.home-shirt-photo img { width: 100%; border: 2px solid var(--border); border-radius: var(--radius); }
+.home-shirt-photo img { width: 100%; border: 0; border-radius: var(--radius); }
 @media (max-width: 680px) { .home-shirt-feature { grid-template-columns: 1fr; } }
 
 .site-home-link {
