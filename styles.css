@@ -1437,7 +1437,8 @@ textarea:focus {
 
 .filmmaking-carousel .carousel-frame {
   height: auto;
-  aspect-ratio: auto;
+  aspect-ratio: 16 / 9;
+  margin-inline: 0;
 }
 
 .filmmaking-carousel .carousel-image {

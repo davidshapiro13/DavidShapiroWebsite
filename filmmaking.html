@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>David Shapiro | Filmmaking</title>
-    <link rel="stylesheet" href="styles.css?v=20261018-adventure-groups">
+    <link rel="stylesheet" href="styles.css?v=20261109-carousel-size">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -483,26 +483,7 @@
       let filmIndex = 0;
       const filmImageA = document.getElementById("filmmaking-carousel-image-a");
       const filmImageB = document.getElementById("filmmaking-carousel-image-b");
-      const filmCarouselFrame = document.querySelector(".filmmaking-carousel .carousel-frame");
       let useA = true;
-      let filmAspectRatio = null;
-
-      const updateFilmFrameHeight = (img) => {
-        if (!filmCarouselFrame || !img || !img.naturalWidth) return;
-        filmAspectRatio = img.naturalHeight / img.naturalWidth;
-        const width = filmCarouselFrame.clientWidth;
-        if (width > 0) {
-          filmCarouselFrame.style.height = `${Math.round(width * filmAspectRatio)}px`;
-        }
-      };
-
-      const attachFilmImageLoad = (img) => {
-        if (!img) return;
-        img.addEventListener("load", () => updateFilmFrameHeight(img));
-      };
-
-      attachFilmImageLoad(filmImageA);
-      attachFilmImageLoad(filmImageB);
 
       const showFilmImage = (index) => {
         filmIndex = (index + filmImages.length) % filmImages.length;
@@ -512,18 +493,10 @@
         incoming.src = next;
         incoming.classList.add("is-active");
         outgoing.classList.remove("is-active");
-        if (incoming.complete) {
-          updateFilmFrameHeight(incoming);
-        }
         useA = !useA;
       };
 
       showFilmImage(0);
-      window.addEventListener("resize", () => {
-        if (filmCarouselFrame && filmAspectRatio) {
-          filmCarouselFrame.style.height = `${Math.round(filmCarouselFrame.clientWidth * filmAspectRatio)}px`;
-        }
-      });
       setInterval(() => showFilmImage(filmIndex + 1), 5000);
 
       const interviewsCarousel = document.getElementById("interviews-carousel");
