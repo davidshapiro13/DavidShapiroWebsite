@@ -291,6 +291,7 @@
     <div data-component="footer"></div>
     <script src="components.js?v=20261013-home-link"></script>
     <script src="performance.js?v=20260529"></script>
+    <script src="carousel.js?v=20261109"></script>
     <script>
       const actingImages = [
         { src: "assets/acting/carousel/acting-carousel-1.png", caption: "Fresh Start" },
@@ -321,27 +322,12 @@
         return array;
       };
 
-      const images = shuffle([...actingImages]);
-      const imageA = document.getElementById("acting-carousel-image-a");
-      const imageB = document.getElementById("acting-carousel-image-b");
-      const captionEl = document.getElementById("acting-carousel-caption");
-      let currentIndex = 0;
-      let useA = true;
-
-      const showImage = (index) => {
-        currentIndex = (index + images.length) % images.length;
-        const next = images[currentIndex];
-        const incoming = useA ? imageB : imageA;
-        const outgoing = useA ? imageA : imageB;
-        incoming.src = next.src;
-        incoming.classList.add("is-active");
-        outgoing.classList.remove("is-active");
-        captionEl.textContent = next.caption;
-        useA = !useA;
-      };
-
-      showImage(0);
-      setInterval(() => showImage(currentIndex + 1), 5000);
+      startPhotoCarousel({
+        images: shuffle([...actingImages]),
+        first: document.getElementById('acting-carousel-image-a'),
+        second: document.getElementById('acting-carousel-image-b'),
+        caption: document.getElementById('acting-carousel-caption'),
+      });
 
       const backgroundOptions = [
         {

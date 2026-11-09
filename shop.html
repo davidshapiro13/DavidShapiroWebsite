@@ -7,7 +7,7 @@
     <meta name="referrer" content="no-referrer">
     <title>David Shapiro | Shop</title>
     <link rel="stylesheet" href="styles.css?v=20261013-home-link">
-    <link rel="stylesheet" href="shop.css?v=20261105-product-cards">
+    <link rel="stylesheet" href="shop.css?v=20261109-compact">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -33,8 +33,9 @@
           <p class="shop-eyebrow">David's latest shirt</p>
           <h3 id="product-title"></h3>
           <p id="product-price" class="shop-price"></p>
-          <p id="product-description"></p>
+          <p>A reading rabbit and a very full schedule, on a relaxed-fit cotton tee.</p>
           <form id="shop-form">
+            <div class="shop-options">
             <div id="color-field" class="shop-field">
               <label for="shirt-color">Color</label>
               <select id="shirt-color" name="color" required></select>
@@ -43,24 +44,29 @@
               <label for="shirt-size">Size</label>
               <select id="shirt-size" name="size" required></select>
             </div>
+            </div>
             <p id="shipping-note" class="shop-small"></p>
             <p id="checkout-message" class="shop-message" role="status" aria-live="polite"></p>
             <button id="buy-shirt" class="btn shop-buy" type="submit" disabled>Buy the Shirt</button>
-            <p class="shop-small">Secure payment through Stripe. Your card details go directly to Stripe.</p>
+
           </form>
-          <details id="size-guide" hidden>
-            <summary>Size guide</summary>
+          <details class="shop-faq">
+            <summary>Product details &amp; FAQs</summary>
+            <p id="product-description"></p>
+          <section id="size-guide" hidden>
+            <h4>Size guide</h4>
             <div id="size-guide-table" class="shop-table-wrap"></div>
-          </details>
-          <details>
-            <summary>Shipping &amp; order questions</summary>
+          </section>
+          <section>
+            <h4>Shipping &amp; order questions</h4>
             <p>Your shirt is printed to order by Printify. Shipping charges and any applicable tax appear before you pay.</p>
             <p>For sizing, delivery, or help with an order, <a href="contact.html">contact David</a>.</p>
-          </details>
-          <details>
-            <summary>Returns &amp; replacements</summary>
+          </section>
+          <section>
+            <h4>Returns &amp; replacements</h4>
             <p>If your shirt arrives damaged, defective, or incorrect, <a href="contact.html">contact David</a> within 30 days of delivery with your order reference and a photo of the issue so we can arrange a replacement or refund.</p>
             <p>Each shirt is printed to order. We do not accept returns or exchanges for a change of mind or an incorrectly selected size. Please check the size guide before ordering.</p>
+          </section>
           </details>
           <p class="shop-small"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
         </div>

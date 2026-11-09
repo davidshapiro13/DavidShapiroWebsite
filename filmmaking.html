@@ -452,6 +452,7 @@
     <div data-component="footer"></div>
     <script src="components.js?v=20261013-home-link"></script>
     <script src="performance.js?v=20260529"></script>
+    <script src="carousel.js?v=20261109"></script>
     <script>
       const filmCarouselImages = [
         "assets/film/carousel/image-1.jpg",
@@ -479,25 +480,11 @@
         return array;
       };
 
-      const filmImages = shuffle([...filmCarouselImages]);
-      let filmIndex = 0;
-      const filmImageA = document.getElementById("filmmaking-carousel-image-a");
-      const filmImageB = document.getElementById("filmmaking-carousel-image-b");
-      let useA = true;
-
-      const showFilmImage = (index) => {
-        filmIndex = (index + filmImages.length) % filmImages.length;
-        const next = filmImages[filmIndex];
-        const incoming = useA ? filmImageB : filmImageA;
-        const outgoing = useA ? filmImageA : filmImageB;
-        incoming.src = next;
-        incoming.classList.add("is-active");
-        outgoing.classList.remove("is-active");
-        useA = !useA;
-      };
-
-      showFilmImage(0);
-      setInterval(() => showFilmImage(filmIndex + 1), 5000);
+      startPhotoCarousel({
+        images: shuffle([...filmCarouselImages]).map(src => ({ src })),
+        first: document.getElementById('filmmaking-carousel-image-a'),
+        second: document.getElementById('filmmaking-carousel-image-b'),
+      });
 
       const interviewsCarousel = document.getElementById("interviews-carousel");
       const interviewCards = Array.from(document.querySelectorAll(".interviews-card"));
