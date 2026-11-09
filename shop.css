@@ -44,3 +44,41 @@
   .shop-details { padding: 22px; }
   .shop-order { padding: 24px; }
 }
+
+/* Stacked product cards, shirt on the left and book on the right. */
+.shop-products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; align-items: start; }
+.shop-card {
+  display: block;
+  min-width: 0;
+  margin: 0;
+  scroll-margin-top: 100px;
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.shop-book .shop-image-frame {
+  display: block;
+  aspect-ratio: auto;
+  border: 0;
+  border-radius: 0;
+}
+.shop-book .shop-image-frame img { display: block; width: 100%; height: auto; }
+.shop-card .shop-details {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: clamp(22px, 4vw, 36px);
+}
+.shop-card .shop-details > p { margin: 12px 0; }
+.shop-card .shop-details > .shop-eyebrow { margin-top: 0; }
+.shop-card .shop-details > .shop-small:last-child { margin-bottom: 0; }
+.shop-book #book-form { margin-top: 24px; }
+
+.shop-card .shop-gallery { min-width: 0; }
+.shop-card .shop-gallery .shop-image-frame { border: 0; border-radius: 0; }
+.shop-card .shop-thumbnails { padding: 0 22px; }
+.shop-products > .shop-empty { width: 100%; }
+@media (max-width: 760px) {
+  .shop-products { grid-template-columns: minmax(0, 1fr); max-width: 680px; width: 100%; margin-inline: auto; }
+}

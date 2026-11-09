@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Shop David Shapiro's latest shirt.">
+    <meta name="description" content="Shop David Shapiro's shirts and Campus Life cartoon book.">
     <meta name="referrer" content="no-referrer">
     <title>David Shapiro | Shop</title>
     <link rel="stylesheet" href="styles.css?v=20261013-home-link">
-    <link rel="stylesheet" href="shop.css?v=20261008-header">
+    <link rel="stylesheet" href="shop.css?v=20261105-product-cards">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -18,12 +18,13 @@
         <img src="assets/shop/header.jpeg" alt="A turquoise lake surrounded by green mountains." fetchpriority="high">
       </header>
       <p id="shop-notice" class="shop-notice" role="status" hidden></p>
+      <div class="shop-products">
       <section id="shop-loading" class="content-block shop-empty" aria-live="polite">
         <h3>Getting the shop ready</h3>
         <p id="shop-loading-text">Loading the latest shirt…</p>
         <p><a href="contact.html">Questions? Get in touch with David.</a></p>
       </section>
-      <section id="shop-product" class="shop-product" aria-labelledby="product-title" hidden>
+      <section id="shop-product" class="shop-product shop-card" aria-labelledby="product-title" hidden>
         <div class="shop-gallery">
           <div class="shop-image-frame"><img id="product-image" alt="" hidden><p id="image-unavailable" hidden>Product photo coming soon.</p></div>
           <div id="product-thumbnails" class="shop-thumbnails" aria-label="Product photos"></div>
@@ -64,11 +65,31 @@
           <p class="shop-small"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
         </div>
       </section>
-      <noscript><p class="content-block">Please enable JavaScript to choose a shirt size and check out. You can also <a href="contact.html">contact David</a> for help.</p></noscript>
+      <section id="campus-life-book" class="shop-product shop-card shop-book" aria-labelledby="book-title">
+        <div class="shop-image-frame"><img loading="lazy" src="assets/comics/comics-old-college-try.jpeg" alt="The Old College Try book cover"></div>
+        <div class="content-block shop-details">
+          <p class="shop-eyebrow">Campus Life Cartoons</p>
+          <h3 id="book-title">The Old College Try</h3>
+          <p>The Complete Campus Life Collection</p>
+          <p class="shop-price">$20.00</p>
+          <p>Follow Eddy and his friends through virtual classes, awkward campus activities, and the day-to-day challenges of college during and after the pandemic.</p>
+          <p><a href="comics.html">Explore Campus Life Cartoons</a></p>
+          <form id="book-form">
+            <p id="book-shipping" class="shop-small">$20 total. Shipping and any applicable tax included. US delivery.</p>
+            <button id="buy-book" class="btn shop-buy" type="submit" disabled>Buy the Book</button>
+            <p id="book-message" class="shop-message" role="status">Checking book availability…</p>
+          </form>
+          <p class="shop-small">Questions about delivery or your order? <a href="contact.html">Contact David</a>.</p>
+          <p class="shop-small"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+        </div>
+      </section>
+      </div>
+      <script src="book.js?v=20261105" defer></script>
+      <noscript><p class="content-block">Please enable JavaScript to shop and check out. You can also <a href="contact.html">contact David</a> for help.</p></noscript>
     </main>
     <div data-component="footer"></div>
     <script src="components.js?v=20261013-home-link"></script>
     <script src="shop-config.js?v=20261007"></script>
-    <script src="shop.js?v=20261008-folded" defer></script>
+    <script src="shop.js?v=20261105-book" defer></script>
   </body>
 </html>

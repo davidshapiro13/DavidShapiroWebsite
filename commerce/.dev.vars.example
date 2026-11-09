@@ -12,3 +12,12 @@ STRIPE_TAX_CODE=txcd_30011000
 CHECKOUT_ENABLED=false
 FULFILLMENT_ENABLED=false
 PAYMENT_MODE=test
+
+# Book checkout stays closed until all email and shipping settings are configured.
+BOOK_CHECKOUT_ENABLED=false
+BOOK_SHIPPING_CENTS=0
+BOOK_SHIPPING_COUNTRIES=US
+BOOK_TAX_CODE=txcd_35010000
+BOOK_ORDER_EMAIL=david.shapiro27@gmail.com
+BOOK_EMAIL_FROM=
+RESEND_API_KEY=

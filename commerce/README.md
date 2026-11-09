@@ -124,7 +124,7 @@ Check orders needing attention using Cloudflare D1's console or:
 npx wrangler d1 execute shop-orders --remote --command "SELECT id, stripe_session_id, printify_order_id, state, error_code, attempts FROM orders WHERE state IN ('needs_review','retry','reconciling') ORDER BY updated_at"
 ```
 
-There is no public admin endpoint and no automated seller-alert email in this version. Monitor this query and Stripe's webhook-delivery dashboard while selling.
+There is no public admin endpoint. Shirt orders do not send seller-alert emails; book orders use the Resend notification described below. Monitor this query and Stripe's webhook-delivery dashboard while selling.
 
 - `payment_mismatch` / `payment_review`: inspect Stripe for amount, currency, refund, dispute, or mode problems. Do not force fulfillment.
 - `invalid_shipping`: inspect the address in Stripe and resolve with the customer.
@@ -156,3 +156,28 @@ No provider payloads or personal data are intentionally logged. Worker observabi
 - `scripts/check-stripe-readiness.mjs` checks sandbox tax setup without printing the address.
 - `scripts/test-hosted-checkout.mjs` completes a hosted sandbox payment with synthetic customer details and Stripe’s documented test card; it requires temporarily enabled test checkout. It never enables checkout or fulfillment itself. Use `--resume` only for an incomplete local test session; close checkout again after testing. Private screenshots and session references stay in `.local/`.
 - Run credentialed scripts from `commerce/` with `node --env-file=.dev.vars scripts/NAME.mjs`. The `.local/` directory and `.dev.vars` are ignored by Git. Never publish either.
+
+## Campus Life book orders
+
+The shop also offers The Old College Try for $20 total, including shipping and any applicable tax. Book prices use inclusive Stripe tax behavior; shirt prices remain exclusive. Paid book notifications go to david.shapiro27@gmail.com. The book uses the existing
+Stripe webhook and D1 ledger, with product ID `campus-life-book`. Stripe collects
+email, shipping name and mailing address. Verified live payments send a plain-text
+fulfillment email through Resend; books never create Printify orders. Test payments
+send no email. The terminal `book_notified` state means the email service accepted
+the notification, not that the book shipped. Email failures retry through cron,
+then enter `needs_review` after repeated failures. Monitor that state for manual handling.
+
+Before opening book checkout, configure the Worker:
+- Secrets: `RESEND_API_KEY`,
+  `BOOK_EMAIL_FROM` (a sender verified with Resend).
+- Variables: `BOOK_ORDER_EMAIL` (configured recipient), `BOOK_SHIPPING_CENTS=0` (required; no surcharge),
+  `BOOK_SHIPPING_COUNTRIES`, `BOOK_TAX_CODE` (appropriate book tax category),
+  `BOOK_CHECKOUT_ENABLED=true`.
+
+Existing Stripe mode, webhook, automatic tax, and global checkout settings still
+apply. No database migration is needed. Missing book configuration closes only
+book checkout. Deploy the Worker and static changes together after configuration.
+Verify notification delivery with an authorized sample order before selling.
+Resend retries use a stable per-order idempotency key; Resend retains these for
+24 hours, so a very late recovery after an ambiguous send can repeat an email.
+Use the order reference to avoid ordering a second copy for the same payment.

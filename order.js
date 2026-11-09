@@ -6,14 +6,15 @@
   let polls = 0, timer, busy = false;
   const messages = {
     checkout: ['Confirming your payment', 'Your payment confirmation is on its way. This page will update shortly.'],
-    paid: ['Thank you for your order', 'Payment received. We’re preparing your shirt order.'],
+    paid: ['Thank you for your order', 'Payment received. We’re preparing your order.'],
     retry: ['Thank you for your order', 'Payment received. Your order is still being processed; there’s no need to pay again.'],
     submitting: ['Thank you for your order', 'Payment received. We’re sending your shirt order to the printer.'],
     reconciling: ['We’re checking your order', 'Payment received. We’re confirming the printing request; please don’t place the order again.'],
     needs_review: ['Your order needs a check', 'Payment received, but your order needs attention before we can confirm fulfillment. Please contact David with the reference below.'],
     cancelled: ['Order closed', 'This order has been closed. Please contact David if you have questions about its refund or cancellation.'],
     submitted: ['Thank you for your order', 'Your shirt order has been received by Printify. Check back here for shipment tracking.'],
-    test_complete: ['Test checkout complete', 'The test payment worked. No real payment was collected and no shirt was ordered.'],
+    book_notified: ['Thank you for your book order', 'Payment received. David has been notified and will arrange your book order. For delivery updates, contact David with your order reference.'],
+    test_complete: ['Test checkout complete', 'The test payment worked. No real payment was collected and no order was fulfilled.'],
   };
   async function refresh() {
     if (busy) return;

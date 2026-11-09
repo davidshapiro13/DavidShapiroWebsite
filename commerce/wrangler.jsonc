@@ -18,6 +18,12 @@
   "vars": {
     "SITE_ORIGIN": "https://davidsshapiro.com",
     "CHECKOUT_ENABLED": "true",
+    "BOOK_CHECKOUT_ENABLED": "true",
+    "BOOK_EMAIL_FROM": "David Shapiro <orders@davidsshapiro.com>",
+    "BOOK_ORDER_EMAIL": "david.shapiro27@gmail.com",
+    "BOOK_SHIPPING_CENTS": "0",
+    "BOOK_SHIPPING_COUNTRIES": "US",
+    "BOOK_TAX_CODE": "txcd_35010000",
     "FULFILLMENT_ENABLED": "true",
     "PAYMENT_MODE": "live",
     "PRINTIFY_SHOP_ID": "28189423",

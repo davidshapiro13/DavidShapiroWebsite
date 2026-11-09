@@ -1,3 +1,4 @@
+import { BOOK_ID, emailBookOrder } from './book.js';
 export function paymentMatches(order, session) {
   return session.mode === 'payment' && session.status === 'complete' && session.payment_status === 'paid' &&
     session.metadata?.order_id === order.id && session.client_reference_id === order.id &&
@@ -5,7 +6,7 @@ export function paymentMatches(order, session) {
     session.currency === order.currency && session.amount_subtotal === order.unit_amount &&
     session.total_details?.amount_shipping === order.shipping_amount &&
     (session.total_details?.amount_discount || 0) === 0 &&
-    session.amount_total === order.unit_amount + order.shipping_amount + (session.total_details?.amount_tax || 0) &&
+    session.amount_total === order.unit_amount + order.shipping_amount + (order.product_id === BOOK_ID ? 0 : (session.total_details?.amount_tax || 0)) &&
     session.livemode === Boolean(order.live);
 }
 
@@ -46,6 +47,15 @@ export async function fulfill(id, { store, stripe, printify, env }) {
     // Printify has no sandbox. A Stripe test payment NEVER creates a Printify order.
     if (!order.live) {
       await finish({ state: 'test_complete', error_code: null });
+      return;
+    }
+    if (order.product_id === BOOK_ID) {
+      if (env.PAYMENT_MODE !== 'live') throw new Error('book_mode_mismatch');
+      let address;
+      try { address = shippingAddress(session, order); }
+      catch { await finish({ state: 'needs_review', error_code: 'invalid_shipping' }); return; }
+      await emailBookOrder(env, order, session, address);
+      await finish({ state: 'book_notified', error_code: null });
       return;
     }
     if (env.PAYMENT_MODE !== 'live' || env.FULFILLMENT_ENABLED !== 'true') {

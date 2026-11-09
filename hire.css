@@ -142,3 +142,17 @@
 .hire-testimonial figcaption {
   font-size: 18px;
 }
+
+.hire-service-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 18px;
+  border: 1px solid rgba(11, 107, 122, .18);
+  border-radius: 18px;
+  background: #ffe3cf;
+  color: var(--accent);
+  box-shadow: 0 4px 10px rgba(11, 27, 31, .06);
+}
+.hire-service-icon svg { display: block; width: 44px; height: 44px; }

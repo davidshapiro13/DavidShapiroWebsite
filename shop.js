@@ -103,7 +103,7 @@
   });
   $('shirt-color').addEventListener('change', chooseColor);
   $('shirt-size').addEventListener('change', chooseSize);
-  if (new URLSearchParams(location.search).get('checkout') === 'cancelled') notice('Checkout was cancelled. You can choose your shirt and try again when you’re ready.');
+  if (new URLSearchParams(location.search).get('checkout') === 'cancelled') notice('Checkout was cancelled. You can choose an item and try again when you’re ready.');
   async function catalog() {
     try {
       const response = await fetch(`${base}/api/product`, { signal: AbortSignal.timeout(25000) });
