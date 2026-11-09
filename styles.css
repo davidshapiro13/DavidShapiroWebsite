@@ -1409,7 +1409,7 @@ textarea:focus {
   background: var(--panel);
   aspect-ratio: 16 / 9;
   position: relative;
-  height: 512px;
+  height: auto;
   width: 100%;
   max-width: 980px;
 }
@@ -2601,11 +2601,13 @@ textarea:focus {
   border-radius: var(--radius);
   overflow: hidden;
   background: #0b1b1f;
-  aspect-ratio: 3.6 / 1;
+  aspect-ratio: 16 / 9;
   position: relative;
 }
 
 .comics-carousel-frame img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -2829,7 +2831,8 @@ textarea:focus {
 .interviews-carousel {
   position: relative;
   width: 100%;
-  height: clamp(430px, 58vw, 620px);
+  height: auto;
+  aspect-ratio: 16 / 9;
   max-width: 980px;
   overflow: visible;
 }
@@ -2838,7 +2841,7 @@ textarea:focus {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: clamp(230px, 34vw, 320px);
+  width: 70%;
   transform: translate(-50%, -50%) scale(0.9);
   opacity: 0;
   pointer-events: none;
@@ -2932,11 +2935,12 @@ textarea:focus {
 
 @media (max-width: 640px) {
   .interviews-carousel {
-    height: clamp(390px, 132vw, 560px);
+    height: auto;
+    aspect-ratio: 16 / 9;
   }
 
   .interviews-card {
-    width: min(74vw, 300px);
+    width: 100%;
   }
 
   .interviews-card.is-prev,
@@ -3157,7 +3161,8 @@ textarea:focus {
 }
 
 .about-carousel .carousel-frame {
-  height: min(62vw, 560px);
+  height: auto;
+  aspect-ratio: 16 / 9;
 }
 
 .about-panel {
@@ -3848,3 +3853,5 @@ textarea:focus {
 .comics-kylo-quote { width: 100%; max-width: 900px; box-sizing: border-box; margin: 28px auto; }
 
 .comics-quote-more { margin-top: 14px; padding: 0; border: 0; background: none; color: inherit; font: inherit; font-weight: 400; text-decoration: underline; cursor: pointer; }
+
+.interviews-carousel .video-embed--short { padding-top: 0; aspect-ratio: 16 / 9; }
