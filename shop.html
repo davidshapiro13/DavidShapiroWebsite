@@ -33,8 +33,12 @@
           <p class="shop-eyebrow">David's latest shirt</p>
           <h3 id="product-title"></h3>
           <p id="product-price" class="shop-price"></p>
-          <p>A reading rabbit and a very full schedule, on a relaxed-fit cotton tee.</p>
+          <p>A reading rabbit and a very full schedule. Choose short or long sleeves.</p>
           <form id="shop-form">
+            <div class="shop-field">
+              <label for="shirt-style">Sleeves</label>
+              <select id="shirt-style" name="style"><option value="short-sleeve">Short sleeve</option><option value="long-sleeve">Long sleeve</option></select>
+            </div>
             <div class="shop-options">
             <div id="color-field" class="shop-field">
               <label for="shirt-color">Color</label>
@@ -113,6 +117,6 @@
     <div data-component="footer"></div>
     <script src="components.js?v=20261013-home-link"></script>
     <script src="shop-config.js?v=20261007"></script>
-    <script src="shop.js?v=20261105-book" defer></script>
+    <script src="shop.js?v=20261115-sleeves" defer></script>
   </body>
 </html>

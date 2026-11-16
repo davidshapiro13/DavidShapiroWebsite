@@ -181,3 +181,7 @@ Verify notification delivery with an authorized sample order before selling.
 Resend retries use a stable per-order idempotency key; Resend retains these for
 24 hours, so a very late recovery after an ambiguous send can repeat an email.
 Use the order reference to avoid ordering a second copy for the same payment.
+
+## Sleeve options
+
+The shirt card offers short and long sleeves. `PRINTIFY_LONG_SLEEVE_PRODUCT_ID` selects the darker-color Unisex Jersey Long Sleeve Tee (`6a6bb41ff6bfdcc2710d5f94`). Both styles use the approved $20 retail price and existing US standard shipping charge. `/api/product?style=long-sleeve` loads its live photos, available variants, and size guide; checkout accepts the allowlisted `style` and stores the selected Printify product for fulfillment. Omitted style preserves existing short-sleeve checkout. Deploy the Worker before publishing the updated storefront.

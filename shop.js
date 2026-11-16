@@ -3,7 +3,7 @@
   const $ = id => document.getElementById(id);
   const base = (window.SHOP_CONFIG?.apiBase || '').replace(/\/$/, '');
   const money = cents => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cents / 100);
-  let product, variant, busy = false, attempt;
+  let product, variant, busy = false, attempt, loading = false;
 
   function notice(text) { $('shop-notice').textContent = text; $('shop-notice').hidden = false; }
   function option(value, label) { const el = document.createElement('option'); el.value = value; el.textContent = label; return el; }
@@ -75,16 +75,16 @@
   }
   $('shop-form').addEventListener('submit', async event => {
     event.preventDefault();
-    if (busy || !variant || !product.checkoutEnabled) return;
+    if (busy || loading || !variant || !product.checkoutEnabled) return;
     busy = true; $('buy-shirt').disabled = true; $('buy-shirt').textContent = 'Opening secure checkout…';
-    $('shirt-color').disabled = true; $('shirt-size').disabled = true;
+    $('shirt-style').disabled = true; $('shirt-color').disabled = true; $('shirt-size').disabled = true;
     $('checkout-message').textContent = '';
     // Reuse the key after a network failure; one click cannot create duplicate sessions.
     attempt ||= crypto.randomUUID();
     try {
       const response = await fetch(`${base}/api/checkout`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ requestId: attempt, variantId: variant.id }), signal: AbortSignal.timeout(60000),
+        body: JSON.stringify({ requestId: attempt, variantId: variant.id, ...($('shirt-style').value === 'long-sleeve' ? { style: 'long-sleeve' } : {}) }), signal: AbortSignal.timeout(60000),
       });
       const data = await response.json();
       if (!response.ok) {
@@ -98,18 +98,20 @@
       $('checkout-message').textContent = error.name === 'TypeError' || error.name === 'TimeoutError'
         ? 'We couldn’t connect to checkout. Please try again.' : error.message;
       busy = false; $('buy-shirt').disabled = false; $('buy-shirt').textContent = 'Buy the Shirt';
-      $('shirt-color').disabled = false; $('shirt-size').disabled = false;
+      $('shirt-style').disabled = false; $('shirt-color').disabled = false; $('shirt-size').disabled = false;
     }
   });
+  $('shirt-style').addEventListener('change', load);
   $('shirt-color').addEventListener('change', chooseColor);
   $('shirt-size').addEventListener('change', chooseSize);
   if (new URLSearchParams(location.search).get('checkout') === 'cancelled') notice('Checkout was cancelled. You can choose an item and try again when you’re ready.');
-  async function catalog() {
+  async function catalog(style) {
     try {
-      const response = await fetch(`${base}/api/product`, { signal: AbortSignal.timeout(25000) });
+      const response = await fetch(`${base}/api/product${style === 'long-sleeve' ? '?style=long-sleeve' : ''}`, { signal: AbortSignal.timeout(25000) });
       if (!response.ok) throw new Error('unavailable');
       return await response.json();
     } catch {
+      if (style === 'long-sleeve') throw new Error('unavailable');
       const response = await fetch('assets/shop/product.json', { signal: AbortSignal.timeout(10000) });
       if (!response.ok) throw new Error('unavailable');
       const data = await response.json();
@@ -119,9 +121,20 @@
     }
   }
   async function load() {
+    loading = true; attempt = null;
+    const style = $('shirt-style').value;
+    const previousColor = $('shirt-color').value;
+    let unavailableMessage = 'The shop is getting ready. Please check back soon.';
+    $('buy-shirt').disabled = true;
+    $('shirt-style').disabled = true; $('shirt-color').disabled = true; $('shirt-size').disabled = true;
+    $('checkout-message').textContent = 'Loading shirt options…';
+    $('size-guide').hidden = true;
     try {
-      const data = await catalog();
-      if (!data.available) { $('shop-loading-text').textContent = data.message; return; }
+      const data = await catalog(style);
+      if (!data.available) {
+        unavailableMessage = data.message || unavailableMessage;
+        throw new Error('unavailable');
+      }
       product = data.product;
       $('product-title').textContent = product.title;
       $('product-description').textContent = product.description;
@@ -132,10 +145,19 @@
       $('color-field').hidden = colors.length === 1 && !colors[0];
       const defaultVariant = product.variants.find(v => v.id === product.defaultVariantId);
       if (defaultVariant) $('shirt-color').value = defaultVariant.color;
+      if (colors.includes(previousColor)) $('shirt-color').value = previousColor;
       chooseColor(); sizeGuide(product.sizeGuide);
       if (product.testMode && product.checkoutEnabled) notice('Preview checkout: payments are in test mode. No shirt will be ordered.');
       $('shop-loading').hidden = true; $('shop-product').hidden = false;
-    } catch { $('shop-loading-text').textContent = 'The shop is getting ready. Please check back soon.'; }
+    } catch {
+      product = null; variant = null;
+      $('buy-shirt').disabled = true;
+      $('checkout-message').textContent = 'This shirt style is temporarily unavailable. Please try again or choose another style.';
+      $('shop-loading-text').textContent = unavailableMessage;
+    } finally {
+      loading = false; $('shirt-style').disabled = false;
+      $('shirt-color').disabled = !product; $('shirt-size').disabled = !product;
+    }
   }
   load();
 })();

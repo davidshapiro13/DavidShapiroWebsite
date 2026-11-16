@@ -40,8 +40,8 @@ export class Printify {
     try { return await response.json(); }
     catch { throw new ProviderError('printify_invalid_response'); }
   }
-  product() {
-    return this.request(`/shops/${encodeURIComponent(this.env.PRINTIFY_SHOP_ID)}/products/${encodeURIComponent(this.env.PRINTIFY_PRODUCT_ID)}.json`);
+  product(productId = this.env.PRINTIFY_PRODUCT_ID) {
+    return this.request(`/shops/${encodeURIComponent(this.env.PRINTIFY_SHOP_ID)}/products/${encodeURIComponent(productId)}.json`);
   }
   sizeGuide(blueprintId) {
     return this.request(`/catalog/blueprints/${Number(blueprintId)}/size_guide.json`);

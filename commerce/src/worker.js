@@ -2,7 +2,7 @@ import Stripe from 'stripe';
 import { BOOK_ID, getBook, bookConfig } from './book.js';
 import { OrderStore } from './store.js';
 import { Printify, stripeClient } from './providers.js';
-import { checkoutConfig, allowedVariants, publicProduct, retailPrice } from './catalog.js';
+import { checkoutConfig, allowedVariants, publicProduct, retailPrice, shirtEnvironment } from './catalog.js';
 import { fulfill, paymentMatches } from './fulfillment.js';
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -39,13 +39,18 @@ export function dependencies(env) {
 }
 
 export async function createCheckout(input, deps) {
-  const { env, store, stripe, printify } = deps;
+  const { store, stripe, printify } = deps;
+  let env = deps.env;
   if (env.CHECKOUT_ENABLED !== 'true') return reply({ error: CLOSED }, 503);
   const book = getBook(input?.product);
+  if (!book) {
+    try { env = shirtEnvironment(env, input?.style); }
+    catch { return reply({ error: 'Choose an available shirt style.' }, 400); }
+  }
   let config;
   try { config = book ? bookConfig(env) : checkoutConfig(env); } catch { return reply({ error: CLOSED }, 503); }
   if (!input || !UUID.test(input.requestId || '') || (!book && !Number.isSafeInteger(input.variantId)) ||
-      Object.keys(input).some(k => !(book ? ['requestId', 'product'] : ['requestId', 'variantId']).includes(k))) {
+      Object.keys(input).some(k => !(book ? ['requestId', 'product'] : ['requestId', 'variantId', 'style']).includes(k))) {
     return reply({ error: 'Choose an available shirt size and try again.' }, 400);
   }
   const variantId = book ? 0 : input.variantId;
@@ -64,7 +69,7 @@ export async function createCheckout(input, deps) {
   if (order && Date.now() - order.created_at > 23 * 60 * 60 * 1000) {
     return reply({ error: 'This checkout has expired. Refresh the page to start again.' }, 409);
   }
-  const product = book ? { title: book.title } : await printify.product();
+  const product = book ? { title: book.title } : await printify.product(env.PRINTIFY_PRODUCT_ID);
   const variant = book ? { id: 0 } : allowedVariants(product, env).find(v => v.id === variantId);
   if (!variant) return reply({ error: 'That size or color is currently unavailable. Please choose another.' }, 409);
   if (!order) order = await store.create({
@@ -150,12 +155,16 @@ export async function route(request, env, ctx, providedDeps) {
     catch { return reply({ checkoutEnabled: false }); }
   }
   if (path === '/api/product' && request.method === 'GET') {
+    const style = new URL(request.url).searchParams.get('style') || 'short-sleeve';
+    try { env = shirtEnvironment(env, style); }
+    catch { return reply({ available: false, message: 'That shirt style is unavailable.' }, 404); }
     if (!env.PRINTIFY_API_TOKEN || !env.PRINTIFY_SHOP_ID || !env.PRINTIFY_PRODUCT_ID) return reply({ available: false, message: CLOSED });
     const printify = providedDeps?.printify || new Printify(env);
-    const product = await printify.product();
+    const product = await printify.product(env.PRINTIFY_PRODUCT_ID);
     let config;
     try { config = checkoutConfig(env); } catch { /* Product can be previewed before payments are configured. */ }
     const data = publicProduct(product, env, config);
+    data.style = style;
     try { data.sizeGuide = await printify.sizeGuide(product.blueprint_id); } catch { data.sizeGuide = null; }
     return reply({ available: true, product: data });
   }

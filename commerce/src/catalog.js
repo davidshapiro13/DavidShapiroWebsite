@@ -1,3 +1,10 @@
+export function shirtEnvironment(env, style = 'short-sleeve') {
+  if (style === 'short-sleeve') return env;
+  if (style !== 'long-sleeve' || !env.PRINTIFY_LONG_SLEEVE_PRODUCT_ID) throw new Error('Unknown shirt style');
+  return { ...env, PRINTIFY_PRODUCT_ID: env.PRINTIFY_LONG_SLEEVE_PRODUCT_ID,
+    PRINTIFY_VARIANT_IDS: undefined, PRODUCT_DESCRIPTION: '' };
+}
+
 export function retailPrice(env) {
   if (!/^\d+$/.test(env.RETAIL_PRICE_CENTS || '')) throw new Error('Retail price is not configured');
   const price = Number(env.RETAIL_PRICE_CENTS);

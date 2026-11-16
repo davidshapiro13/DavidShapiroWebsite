@@ -116,3 +116,31 @@ test('changing color preserves the selected size when it is available', async ({
   await page.getByLabel('Color', { exact: true }).selectOption('White');
   await expect(page.getByLabel('Size', { exact: true })).toHaveValue('12');
 });
+
+test('sleeve selector updates photos and options and submits the selected style', async ({ page }) => {
+  await setup(page);
+  await page.route('**/api/product?style=long-sleeve', r => r.fulfill({ json: { available: true, product: {
+    ...product, title: 'Long Sleeve Tee', description: 'Long sleeves',
+    variants: [{ id: 91, title: 'Navy / M', color: 'Navy', size: 'M', price: 2000 }],
+    images: [{ src: 'https://images.example.test/long.svg', variantIds: [91] }],
+  } } }));
+  let submitted;
+  await page.route('**/api/checkout', async r => {
+    submitted = r.request().postDataJSON();
+    await r.fulfill({ status: 503, json: { error: 'Test checkout' } });
+  });
+  await page.goto('/shop.html');
+  await expect(page.locator('#buy-shirt')).toBeEnabled();
+  await page.getByLabel('Sleeves', { exact: true }).selectOption('long-sleeve');
+  await expect(page.locator('#product-title')).toHaveText('Long Sleeve Tee');
+  await expect(page.locator('#product-price')).toHaveText('$20.00');
+  await expect(page.locator('#product-image')).toHaveAttribute('src', 'https://images.example.test/long.svg');
+  await expect(page.locator('#shirt-color')).toHaveValue('Navy');
+  await page.locator('#buy-shirt').click();
+  await expect(page.locator('#checkout-message')).toHaveText('Test checkout');
+  expect(submitted.style).toBe('long-sleeve');
+  expect(submitted.variantId).toBe(91);
+  await page.getByLabel('Sleeves', { exact: true }).selectOption('short-sleeve');
+  await expect(page.locator('#product-title')).toHaveText('Test shirt');
+  await expect(page.locator('#shirt-color')).toHaveValue('Blue');
+});
