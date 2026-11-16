@@ -2601,13 +2601,11 @@ textarea:focus {
   border-radius: var(--radius);
   overflow: hidden;
   background: #0b1b1f;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3.6 / 1;
   position: relative;
 }
 
 .comics-carousel-frame img {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -2651,7 +2649,7 @@ textarea:focus {
 .comics-process {
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .comics-process-item img {
@@ -2676,7 +2674,8 @@ textarea:focus {
 
 @media (max-width: 900px) {
   .comics-process {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(200px, 1fr));
+    overflow-x: auto;
   }
 }
 
@@ -2831,8 +2830,7 @@ textarea:focus {
 .interviews-carousel {
   position: relative;
   width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
+  height: clamp(430px, 58vw, 620px);
   max-width: 980px;
   overflow: visible;
 }
@@ -2841,7 +2839,7 @@ textarea:focus {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 70%;
+  width: clamp(230px, 34vw, 320px);
   transform: translate(-50%, -50%) scale(0.9);
   opacity: 0;
   pointer-events: none;
@@ -2935,12 +2933,11 @@ textarea:focus {
 
 @media (max-width: 640px) {
   .interviews-carousel {
-    height: auto;
-    aspect-ratio: 16 / 9;
+    height: clamp(390px, 132vw, 560px);
   }
 
   .interviews-card {
-    width: 100%;
+    width: min(74vw, 300px);
   }
 
   .interviews-card.is-prev,
@@ -3853,5 +3850,3 @@ textarea:focus {
 .comics-kylo-quote { width: 100%; max-width: 900px; box-sizing: border-box; margin: 28px auto; }
 
 .comics-quote-more { margin-top: 14px; padding: 0; border: 0; background: none; color: inherit; font: inherit; font-weight: 400; text-decoration: underline; cursor: pointer; }
-
-.interviews-carousel .video-embed--short { padding-top: 0; aspect-ratio: 16 / 9; }

@@ -86,3 +86,39 @@ test('book checkout rejects shipping surcharges', async () => {
   assert.equal((await createCheckout(input, f.deps)).status, 503);
   assert.equal(f.calls.sessions.length, 0);
 });
+
+test('Kylo costs $16 inclusive and sends the correct manual fulfillment notification', async () => {
+  const f = setup();
+  f.session.amount_subtotal = 1600;
+  f.session.amount_total = 1600;
+  f.session.total_details.amount_tax = 100;
+  f.printify.product = () => { throw new Error('must not call'); };
+  const kylo = { requestId: id, product: 'kylo-kangaroo-book' };
+  assert.equal((await createCheckout(kylo, f.deps)).status, 200);
+  const price = f.calls.sessions[0].params.line_items[0].price_data;
+  assert.equal(price.unit_amount, 1600);
+  assert.equal(price.tax_behavior, 'inclusive');
+  assert.equal(price.product_data.name, 'Kylo Kangaroo Tries Something New');
+  assert.equal(paymentMatches(await f.store.get(id), f.session), true);
+  assert.equal((await createCheckout(input, f.deps)).status, 409);
+  await f.store.markPaid(id);
+  const previous = globalThis.fetch;
+  let emails = 0;
+  globalThis.fetch = async (_url, options) => {
+    emails++;
+    const body = JSON.parse(options.body);
+    assert.deepEqual(body.to, ['seller@example.com']);
+    assert.match(body.text, /Kylo Kangaroo Tries Something New/);
+    assert.match(body.text, /Paid: \$16\.00 USD \(book: \$16\.00\)/);
+    assert.match(body.text, /123 Test St/);
+    assert.doesNotMatch(body.text, /Old College Try/);
+    return Response.json({ id: 'kylo-email' });
+  };
+  try {
+    await fulfill(id, f.deps);
+    await fulfill(id, f.deps);
+    assert.equal(emails, 1);
+    assert.equal((await f.store.get(id)).state, 'book_notified');
+    assert.equal(f.calls.orders.length, 0);
+  } finally { globalThis.fetch = previous; }
+});

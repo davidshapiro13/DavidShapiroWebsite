@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Shop David Shapiro's shirts and Campus Life cartoon book.">
+    <meta name="description" content="Shop David Shapiro's shirts, Campus Life cartoons, and Kylo Kangaroo book.">
     <meta name="referrer" content="no-referrer">
     <title>David Shapiro | Shop</title>
     <link rel="stylesheet" href="styles.css?v=20261013-home-link">
-    <link rel="stylesheet" href="shop.css?v=20261109-compact">
+    <link rel="stylesheet" href="shop.css?v=20261115-button-contrast">
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -15,7 +15,7 @@
     <main id="main" class="main shop-main shop-front">
       <header class="hero-media hero-media--fullbleed hero-media--fade shop-top-media">
         <h2 class="hero-media-title shop-top-title">The Shop</h2>
-        <img src="assets/shop/header.jpeg" alt="A turquoise lake surrounded by green mountains." fetchpriority="high">
+        <img src="assets/shop/header2.jpeg" alt="David signing books at a comic shop, with Campus Life and Kylo Kangaroo on display." fetchpriority="high">
       </header>
       <p id="shop-notice" class="shop-notice" role="status" hidden></p>
       <div class="shop-products">
@@ -80,8 +80,8 @@
           <p class="shop-price">$20.00</p>
           <p>Follow Eddy and his friends through virtual classes, awkward campus activities, and the day-to-day challenges of college during and after the pandemic.</p>
           <p><a href="comics.html">Explore Campus Life Cartoons</a></p>
-          <form id="book-form">
-            <p id="book-shipping" class="shop-small">$20 total. Shipping and any applicable tax included. US delivery.</p>
+          <form id="book-form" data-book-product="campus-life-book">
+            <p id="book-shipping" data-book-shipping class="shop-small">$20 total. Shipping and any applicable tax included. US delivery.</p>
             <button id="buy-book" class="btn shop-buy" type="submit" disabled>Buy the Book</button>
             <p id="book-message" class="shop-message" role="status">Checking book availability…</p>
           </form>
@@ -89,8 +89,25 @@
           <p class="shop-small"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
         </div>
       </section>
+      <section id="kylo-kangaroo-book" class="shop-product shop-card shop-book" aria-labelledby="kylo-book-title">
+        <div class="shop-image-frame"><img loading="lazy" src="assets/comics/comics-kylo.jpeg" alt="Kylo Kangaroo Tries Something New book cover"></div>
+        <div class="content-block shop-details">
+          <p class="shop-eyebrow">Kylo Kangaroo</p>
+          <h3 id="kylo-book-title">Kylo Kangaroo Tries Something New</h3>
+          <p class="shop-price">$16.00</p>
+          <p>A children's book about a kangaroo going on an adventure to New Zealand.</p>
+          <p><a href="comics.html">Explore Kylo Kangaroo</a></p>
+          <form id="kylo-book-form" data-book-product="kylo-kangaroo-book">
+            <p id="kylo-book-shipping" data-book-shipping class="shop-small">$16 total. Shipping and any applicable tax included. US delivery.</p>
+            <button id="buy-kylo-book" class="btn shop-buy" type="submit" disabled>Buy the Book</button>
+            <p id="kylo-book-message" class="shop-message" role="status">Checking book availability…</p>
+          </form>
+          <p class="shop-small">Questions about delivery or your order? <a href="contact.html">Contact David</a>.</p>
+          <p class="shop-small"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+        </div>
+      </section>
       </div>
-      <script src="book.js?v=20261105" defer></script>
+      <script src="book.js?v=20261115" defer></script>
       <noscript><p class="content-block">Please enable JavaScript to shop and check out. You can also <a href="contact.html">contact David</a> for help.</p></noscript>
     </main>
     <div data-component="footer"></div>

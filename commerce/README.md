@@ -157,10 +157,10 @@ No provider payloads or personal data are intentionally logged. Worker observabi
 - `scripts/test-hosted-checkout.mjs` completes a hosted sandbox payment with synthetic customer details and Stripe’s documented test card; it requires temporarily enabled test checkout. It never enables checkout or fulfillment itself. Use `--resume` only for an incomplete local test session; close checkout again after testing. Private screenshots and session references stay in `.local/`.
 - Run credentialed scripts from `commerce/` with `node --env-file=.dev.vars scripts/NAME.mjs`. The `.local/` directory and `.dev.vars` are ignored by Git. Never publish either.
 
-## Campus Life book orders
+## Book orders
 
-The shop also offers The Old College Try for $20 total, including shipping and any applicable tax. Book prices use inclusive Stripe tax behavior; shirt prices remain exclusive. Paid book notifications go to david.shapiro27@gmail.com. The book uses the existing
-Stripe webhook and D1 ledger, with product ID `campus-life-book`. Stripe collects
+The shop offers The Old College Try for $20 total and Kylo Kangaroo Tries Something New for $16 total, each including shipping and any applicable tax. Both use the same manual ordering and notification flow. Book prices use inclusive Stripe tax behavior; shirt prices remain exclusive. Paid book notifications go to david.shapiro27@gmail.com. The book uses the existing
+Stripe webhook and D1 ledger, with product IDs `campus-life-book` and `kylo-kangaroo-book`. The server selects the title and price from its book catalog; each notification identifies the purchased book. Stripe collects
 email, shipping name and mailing address. Verified live payments send a plain-text
 fulfillment email through Resend; books never create Printify orders. Test payments
 send no email. The terminal `book_notified` state means the email service accepted

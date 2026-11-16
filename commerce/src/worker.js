@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import { BOOK_ID, BOOK_TITLE, bookConfig } from './book.js';
+import { BOOK_ID, getBook, bookConfig } from './book.js';
 import { OrderStore } from './store.js';
 import { Printify, stripeClient } from './providers.js';
 import { checkoutConfig, allowedVariants, publicProduct, retailPrice } from './catalog.js';
@@ -41,7 +41,7 @@ export function dependencies(env) {
 export async function createCheckout(input, deps) {
   const { env, store, stripe, printify } = deps;
   if (env.CHECKOUT_ENABLED !== 'true') return reply({ error: CLOSED }, 503);
-  const book = input?.product === BOOK_ID;
+  const book = getBook(input?.product);
   let config;
   try { config = book ? bookConfig(env) : checkoutConfig(env); } catch { return reply({ error: CLOSED }, 503); }
   if (!input || !UUID.test(input.requestId || '') || (!book && !Number.isSafeInteger(input.variantId)) ||
@@ -49,7 +49,7 @@ export async function createCheckout(input, deps) {
     return reply({ error: 'Choose an available shirt size and try again.' }, 400);
   }
   const variantId = book ? 0 : input.variantId;
-  const productId = book ? BOOK_ID : env.PRINTIFY_PRODUCT_ID;
+  const productId = book ? book.id : env.PRINTIFY_PRODUCT_ID;
   let order = await store.get(input.requestId);
   if (order && (order.product_id !== productId || order.variant_id !== variantId || order.live !== Number(config.live))) {
     return reply({ error: 'Your selection changed. Refresh the page and try again.' }, 409);
@@ -64,12 +64,12 @@ export async function createCheckout(input, deps) {
   if (order && Date.now() - order.created_at > 23 * 60 * 60 * 1000) {
     return reply({ error: 'This checkout has expired. Refresh the page to start again.' }, 409);
   }
-  const product = book ? { title: BOOK_TITLE } : await printify.product();
+  const product = book ? { title: book.title } : await printify.product();
   const variant = book ? { id: 0 } : allowedVariants(product, env).find(v => v.id === variantId);
   if (!variant) return reply({ error: 'That size or color is currently unavailable. Please choose another.' }, 409);
   if (!order) order = await store.create({
     id: input.requestId, shop_id: book ? 'manual' : env.PRINTIFY_SHOP_ID, product_id: productId,
-    variant_id: variant.id, unit_amount: book ? 2000 : retailPrice(env), shipping_amount: config.shipping,
+    variant_id: variant.id, unit_amount: book ? book.price : retailPrice(env), shipping_amount: config.shipping,
     countries: config.countries.join(','), live: Number(config.live),
   });
   // A concurrent request may have inserted the same request ID for another variant.
@@ -81,7 +81,7 @@ export async function createCheckout(input, deps) {
     payment_intent_data: { metadata: { order_id: order.id } },
     line_items: [{ quantity: 1, price_data: {
       currency: 'usd', unit_amount: order.unit_amount, tax_behavior: book ? 'inclusive' : 'exclusive',
-      product_data: { name: book ? BOOK_TITLE : `${product.title} — ${variant.title}`, tax_code: book ? env.BOOK_TAX_CODE : env.STRIPE_TAX_CODE },
+      product_data: { name: book ? book.title : `${product.title} — ${variant.title}`, tax_code: book ? env.BOOK_TAX_CODE : env.STRIPE_TAX_CODE },
     } }],
     shipping_address_collection: { allowed_countries: order.countries.split(',') },
     shipping_options: [{ shipping_rate_data: {
@@ -144,7 +144,9 @@ export async function route(request, env, ctx, providedDeps) {
   const path = new URL(request.url).pathname;
   if (path === '/api/health' && request.method === 'GET') return reply({ ok: true });
   if (path === '/api/book' && request.method === 'GET') {
-    try { const config = bookConfig(env); return reply({ checkoutEnabled: env.CHECKOUT_ENABLED === 'true', ...config }); }
+    const book = getBook(new URL(request.url).searchParams.get('product') || BOOK_ID);
+    if (!book) return reply({ checkoutEnabled: false }, 404);
+    try { const config = bookConfig(env); return reply({ checkoutEnabled: env.CHECKOUT_ENABLED === 'true', ...config, product: book }); }
     catch { return reply({ checkoutEnabled: false }); }
   }
   if (path === '/api/product' && request.method === 'GET') {

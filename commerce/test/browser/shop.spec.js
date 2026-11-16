@@ -34,7 +34,7 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000
     await expect(page.locator('#shop-notice')).toContainText('test mode');
     await page.getByLabel('Size', { exact: true }).selectOption('11');
     await expect(page.locator('#product-price')).toHaveText('$27.00');
-    await page.getByText('Size guide', { exact: true }).click();
+    await page.getByText('Product details & FAQs', { exact: true }).click();
     await expect(page.getByRole('table')).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await page.evaluate(() => window.scrollTo(0, 0));

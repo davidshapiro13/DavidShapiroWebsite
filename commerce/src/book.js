@@ -1,6 +1,13 @@
 export const BOOK_ID = 'campus-life-book';
 export const BOOK_TITLE = 'The Old College Try — The Complete Campus Life Collection';
 
+const BOOKS = new Map([
+  [BOOK_ID, { id: BOOK_ID, title: BOOK_TITLE, price: 2000 }],
+  ['kylo-kangaroo-book', { id: 'kylo-kangaroo-book', title: 'Kylo Kangaroo Tries Something New', price: 1600 }],
+]);
+
+export function getBook(id) { return BOOKS.get(id); }
+
 export function bookConfig(env) {
   const live = env.PAYMENT_MODE === 'live';
   const origin = new URL(env.SITE_ORIGIN);
@@ -19,6 +26,8 @@ export function bookConfig(env) {
 }
 
 export async function emailBookOrder(env, order, session, address) {
+  const book = getBook(order.product_id);
+  if (!book) throw new Error('unknown_book');
   const shipping = session.shipping_details || session.collected_information?.shipping_details;
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -28,10 +37,10 @@ export async function emailBookOrder(env, order, session, address) {
       from: env.BOOK_EMAIL_FROM, to: [env.BOOK_ORDER_EMAIL],
       subject: `Paid book order — DS-${order.id.slice(0, 8).toUpperCase()}`,
       text: [
-        'Please order and mail one copy of:', BOOK_TITLE,
+        'Please order and mail one copy of:', book.title,
         `Order reference: DS-${order.id.slice(0, 8).toUpperCase()}`,
         `Stripe session: ${session.id}`,
-        `Paid: $${(session.amount_total / 100).toFixed(2)} USD (book: $20.00)`,
+        `Paid: $${(session.amount_total / 100).toFixed(2)} USD (book: $${(order.unit_amount / 100).toFixed(2)})`,
         '', `Name: ${shipping.name}`, `Email: ${address.email}`, 'Mailing address:',
         address.address1, address.address2, `${address.city}, ${address.region} ${address.zip}`, address.country,
       ].filter(Boolean).join('\n'),
